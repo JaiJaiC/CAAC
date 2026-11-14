@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CAAC 无人机地面站 · 核心笔记</title>
-<meta name="description" content="CAAC 无人机地面站考试（预规划 / 重规划 / 应急返航）精简核心笔记：方位角、相对坐标编辑器 SOP、题型翻译表、参数解码、检查清单。">
+<title>CAAC 无人机地面站 · 从零学会做题</title>
+<meta name="description" content="地面站考试教学笔记：先练方位角、几何、软件四步、条件翻译四项底层能力，再用 6 道例题把方法焊死。">
 <style>
 :root{
   --bg:#f2f4f7; --card:#fff; --ink:#12151c; --ink2:#3f4859; --muted:#79839a;
@@ -72,7 +72,7 @@ hr{border:0;border-top:1px dashed var(--line);margin:18px 0}
    radial-gradient(700px 240px at 98% 0%,#e6f7f5 0%,transparent 55%),
    var(--card);
   border:1px solid var(--line);border-radius:var(--r);padding:26px 28px;margin-bottom:18px}
-.hero h1{margin:0;font-size:29px;letter-spacing:-.6px;line-height:1.25}
+.hero h1{margin:0;font-size:28px;letter-spacing:-.6px;line-height:1.3}
 .hero h1 em{font-style:normal;color:var(--brand)}
 .hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .chip{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;padding:3px 9px;border-radius:999px;
@@ -95,8 +95,7 @@ hr{border:0;border-top:1px dashed var(--line);margin:18px 0}
 .tw{overflow-x:auto;margin:10px 0;border:1px solid var(--line);border-radius:10px}
 table{width:100%;border-collapse:collapse;font-size:14px;background:#fff}
 th,td{padding:8px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line2)}
-th{background:#f7f8fb;font-weight:700;font-size:12.5px;letter-spacing:.03em;color:var(--ink2);white-space:nowrap;
-  position:sticky;top:0}
+th{background:#f7f8fb;font-weight:700;font-size:12.5px;letter-spacing:.03em;color:var(--ink2);white-space:nowrap}
 tr:last-child td{border-bottom:0}
 tbody tr:hover{background:#fbfcff}
 td.c,th.c{text-align:center}
@@ -116,6 +115,11 @@ code,.f{font-family:var(--mono);font-size:.92em;background:#f4f6fb;border:1px so
 .tip .lb,.warn .lb,.key .lb{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.1em;
   padding:0 6px;border-radius:4px;margin-right:6px;background:rgba(255,255,255,.7);border:1px solid rgba(0,0,0,.06)}
 
+/* ---------- why ---------- */
+.why{font-size:13px;color:#5a6577;background:#f8f9fc;border-left:3px solid var(--brand-line);
+  padding:7px 11px;border-radius:0 8px 8px 0;margin:8px 0 12px;line-height:1.7}
+.why b{color:var(--ink2)}
+
 /* ---------- steps ---------- */
 .steps{list-style:none;padding:0;margin:12px 0;counter-reset:s}
 .steps>li{position:relative;padding:0 0 0 40px;margin:0 0 14px}
@@ -125,11 +129,33 @@ code,.f{font-family:var(--mono);font-size:.92em;background:#f4f6fb;border:1px so
 .steps>li .body{font-size:14px;color:var(--ink2)}
 .steps.flat>li:before{background:#eef1f7;color:var(--ink2)}
 
+/* ---------- model ---------- */
+.model{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.model .m{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:#fcfdff;position:relative}
+.model .m .n{font:700 11px/1 var(--mono);color:#fff;background:var(--teal);border-radius:5px;padding:4px 7px;position:absolute;right:10px;top:10px}
+.model .m .t{font-weight:800;font-size:14.5px;margin-bottom:3px}
+.model .m .d{font-size:12.5px;color:var(--muted);line-height:1.6}
+
+/* ---------- example ---------- */
+.ex{border:1px solid var(--line);border-radius:12px;padding:16px 18px 14px;margin:16px 0;background:#fff}
+.ex .t{display:flex;gap:9px;align-items:center;font-weight:800;font-size:15.5px;margin-bottom:4px}
+.ex .t .no{font:700 11px/1 var(--mono);background:var(--brand);color:#fff;padding:5px 7px;border-radius:6px;letter-spacing:.04em}
+.ex .q{background:#f7f9fc;border:1px dashed #d9e0ee;border-radius:8px;padding:10px 12px;font-size:13.8px;margin:10px 0;color:var(--ink2)}
+.ex .q b{color:var(--ink)}
+.ex h5{margin:14px 0 4px;font-size:13.5px;color:var(--brand);letter-spacing:.02em}
+.ex ol,.ex ul{font-size:14px}
+.ex .res{background:var(--green-soft);border:1px solid #cfe9db;color:#0f5b39;border-radius:8px;padding:8px 12px;font-size:14px;margin-top:10px}
+.ex .res b{color:#0b4429}
+
+details{border:1px solid var(--line);border-radius:8px;padding:8px 12px;background:#fcfdff;margin:8px 0}
+details summary{cursor:pointer;font-weight:600;font-size:14px;color:var(--ink2)}
+details[open] summary{margin-bottom:6px}
+details .a{font-size:14px}
+
 /* ---------- misc ---------- */
 .kbd{display:inline-block;font:600 12px/1.6 var(--mono);padding:0 6px;border:1px solid #ccd3e0;
   border-bottom-width:2px;border-radius:5px;background:#fff;color:var(--ink2)}
 .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12.5px;color:var(--muted);margin-top:12px}
-.legend i{font-style:normal;font-weight:700}
 .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;padding:0 5px;border-radius:4px;
   vertical-align:1px;white-space:nowrap}
 .tag.bl{background:var(--brand-soft);color:var(--brand);border:1px solid var(--brand-line)}
@@ -158,16 +184,14 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
   .wrap{grid-template-columns:1fr;padding-top:72px}
   aside.toc{position:static;max-height:none;order:-1}
   aside.toc .list{display:grid;grid-template-columns:repeat(2,1fr);gap:0 8px}
-  .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:640px){
   body{font-size:15px}
   .sec{padding:18px 16px}
   .hero{padding:20px 18px}
-  .hero h1{font-size:23px}
-  .g2,.g3,.g4{grid-template-columns:1fr}
-  th{position:static}
+  .hero h1{font-size:22px}
+  .g2,.g3,.g4,.model{grid-template-columns:1fr}
   .bar .sub{display:none}
 }
 
@@ -182,13 +206,15 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
     border:0;border-top:1px solid #bbb;border-radius:0}
   .hero{background:#fff;break-inside:avoid}
   .sec>h2{font-size:14pt;break-after:avoid;break-inside:avoid}
-  h3,h4{break-after:avoid}
+  h3,h4,h5{break-after:avoid}
   table{font-size:8.6pt}
   thead{display:table-header-group}
   th{background:#f0f0f0!important;position:static}
-  tr,.box,.tip,.warn,.key,.steps>li{break-inside:avoid}
+  tr,.box,.tip,.warn,.key,.steps>li,.ex,.model .m,details{break-inside:avoid}
   a{color:#000;text-decoration:none}
   .tw{overflow:visible;border-color:#bbb}
+  details{display:block}
+  details .a{display:block!important}
 }
 </style>
 </head>
@@ -196,8 +222,8 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
 <div id="prog"></div>
 
 <div class="bar">
-  <div class="logo"><span class="dot"></span>CAAC 地面站 · 核心笔记</div>
-  <div class="sub">预规划 / 重规划 / 应急返航 &nbsp;·&nbsp; LinkGCS 3.0.7</div>
+  <div class="logo"><span class="dot"></span>CAAC 地面站 · 从零学会做题</div>
+  <div class="sub">四项能力 · 六道例题 · 举一反三</div>
   <div class="spacer"></div>
   <button class="btn" onclick="window.print()">打印 / 存 PDF</button>
 </div>
@@ -206,650 +232,696 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
 <aside class="toc" aria-label="目录">
   <div class="h">目录</div>
   <div class="list">
-    <a href="#map">00 题型地图</a>
-    <a href="#exam">01 考试三关</a>
-    <a href="#bearing">02 方位角基础</a>
-    <a href="#sop">03 预规划 SOP</a>
-    <a href="#rot">04 题型·旋转条件</a>
-    <a href="#home">05 题型·起飞点</a>
-    <a href="#special">06 题型·特殊任务</a>
-    <a href="#params">07 参数录入</a>
-    <a href="#replan">08 重规划</a>
-    <a href="#rtl">09 应急返航</a>
-    <a href="#check">10 检查清单</a>
-    <a href="#stats">11 真题统计</a>
-    <a href="#calc">12 速算器</a>
+    <a href="#intro">00 先想明白在考什么</a>
+    <a href="#angle">01 能力① 方位角</a>
+    <a href="#geo">02 能力② 几何</a>
+    <a href="#soft">03 能力③ 软件四步</a>
+    <a href="#trans">04 能力④ 条件翻译</a>
+    <a href="#ex">05 例题精讲</a>
+    <a href="#types">06 题型全景</a>
+    <a href="#replan">07 重规划</a>
+    <a href="#rtl">08 应急返航</a>
+    <a href="#check">09 检查与坑</a>
+    <a href="#calc">10 速算器</a>
+    <a href="#plan">11 五天计划</a>
   </div>
 </aside>
 
 <main>
 
 <div class="hero">
-  <h1>无人机<em>地面站</em>核心笔记<br><small style="font-size:15px;font-weight:500;color:#5a6577">一页看懂：软件怎么点 · 条件怎么翻 · 参数怎么填 · 分怎么丢</small></h1>
+  <h1>地面站考试的<em>唯一真相</em><br><small style="font-size:15px;font-weight:500;color:#5a6577">题目千变万化，但每道题都在描述同一张图的四件事</small></h1>
   <div class="meta">
-    <span class="chip b">来源：备考宝典 79 页 + 真题 516 张卡</span>
-    <span class="chip t">软件：LinkGCS 3.0.7</span>
+    <span class="chip b">先学 4 项底层能力，再练 6 道例题</span>
+    <span class="chip t">LinkGCS 3.0.7</span>
     <span class="chip">预规划 · 重规划 · 应急返航</span>
-    <span class="chip a">零基础可直接按 SOP 照做</span>
+    <span class="chip a">零基础，按顺序读即可</span>
   </div>
 </div>
 
-<!-- ============ 00 题型地图 ============ -->
-<section class="sec" id="map">
-  <h2><span class="n">00</span>题型地图（先看这张）</h2>
-  <p class="lead">516 张真题卡自动统计。出现率可重叠，只看“先练哪一类”。</p>
+<!-- ============ 00 ============ -->
+<section class="sec" id="intro">
+  <h2><span class="n">00</span>先想明白：这套题到底在考什么</h2>
+  <p class="lead">如果你只记住一句话，请记住这句：<b>考官用文字描述一张图，你要把这张图在软件里还原出来。</b></p>
 
-  <div class="tw">
-  <table class="small">
-    <thead><tr><th style="width:22%">题型</th><th class="c" style="width:11%">出现率</th><th>题面长什么样</th><th style="width:26%">一句话解法</th></tr></thead>
+  <h3>0.1 一张航线图，只需要四件事就唯一确定</h3>
+  <div class="model">
+    <div class="m"><span class="n">①</span><div class="t">形状</div><div class="d">几条边、每条边多长、每个角多大。例："等边三角形，边长 80 米""直角梯形，∠2=135°"。</div></div>
+    <div class="m"><span class="n">②</span><div class="t">朝向</div><div class="d">这张图在地图上怎么摆。例："3 到 1 的指向角 160°""2-3 逆风""∠H12=30°"。</div></div>
+    <div class="m"><span class="n">③</span><div class="t">起飞点 H</div><div class="d">H 相对图里某个点的方位和距离。例："起飞点到 2 点航向 NE，距离 80 米"。</div></div>
+    <div class="m"><span class="n">④</span><div class="t">位置</div><div class="d">某个点的经纬度。例："H 经纬度 N31.26°、E95°20′24″"。</div></div>
+  </div>
+  <p>再加上第五样——<b>参数</b>（高度、水平速度、垂直速度、停留时间、转弯模式、循环次数、完成动作）。<b>四件事 + 参数齐了，这张图就唯一确定，答案就没有争议。</b></p>
+
+  <div class="why"><b>为什么这样理解就能举一反三？</b>因为出题人无论怎么改，也只能在"四件事"上换说法：想考几何，就改①；想考你的方位感，就改②；想考你会不会取反方向，就改③；想考你会不会用平移，就改④。你练的是<b>把话翻译成这四件事</b>的能力，而不是背第 37 题的答案。</div>
+
+  <h3>0.2 你真正要先学的，是这五项能力</h3>
+  <div class="tw"><table>
+    <thead><tr><th style="width:6%" class="c">#</th><th style="width:20%">能力</th><th>具体要学会什么</th><th style="width:28%">学不好会怎样</th></tr></thead>
     <tbody>
-      <tr><td><b>① 常规闭合图形</b></td><td class="c num">100%</td><td>等边三角形 / 五边形 / 六边形 / 梯形 / 四边形，给边长+内角</td><td>边长+内角 → 夹角法画闭合 → 旋转</td></tr>
-      <tr><td><b>② 参数化题干</b></td><td class="c num">50%</td><td>“边长 a、高度 b、水平 c、垂直 d、停留 e”，(二)给数值</td><td>字母不要背位置，逐个画线去(二)取值</td></tr>
-      <tr><td><b>③ 夹角 / 双夹角</b></td><td class="c num">59% / 45%</td><td>∠H12=30°、∠H31、∠1=∠2=90°</td><td>待求 = 已知 ± 夹角（顺＋逆−）</td></tr>
-      <tr><td><b>④ 起飞点 H 条件</b></td><td class="c num">100%</td><td>“起飞点到 2 点航向 NE，距离 80m”</td><td>换成 X-H 的方位角 + 距离输入</td></tr>
-      <tr><td><b>⑤ 避让点 / 空域限制</b></td><td class="c num">13%</td><td>“起飞后先向 NE 飞 600m 到避让点，再执行”</td><td>以 1 号点反向推新 1 号点（原 1 变 2）</td></tr>
-      <tr><td><b>⑥ 风向条件</b></td><td class="c num">15%</td><td>“西北风，2-3 逆风”“5 到 4 正右侧风”</td><td>风向来向 F：顺 F+180 / 逆 F / 左 F+90 / 右 F−90</td></tr>
-      <tr><td><b>⑦ 双坐标</b></td><td class="c num">12%</td><td>H 坐标 + 航点坐标，或两个航点坐标</td><td>H 直接输坐标回车；两航点连线定朝向免旋转</td></tr>
-      <tr><td><b>⑧ 扫描航线</b></td><td class="c num">9%</td><td>“于起飞点前规划扫描航线，长度 a、间隔 b”</td><td>扫描航线工具按 a~f 逐项填，再生成</td></tr>
-      <tr><td><b>⑨ 图形理解</b></td><td class="c num">常见</td><td>“H 到 5、6 距离相等且等于边长”“H 平分 ∠612”</td><td>先推角度/方位 → 当旋转条件用</td></tr>
-      <tr><td><b>⑩ 时针分针</b></td><td class="c num">1%</td><td>“航向为 1 点 48 分（时针）”“2 点 30 分的夹角”</td><td>时针 30H+0.5M，分针 6M</td></tr>
-      <tr><td><b>⑪ 重规划</b></td><td class="c num">必考</td><td>考官口述：“2 到 3 高度升高 5m”</td><td>速前高后 + 上传 + 开始执行点</td></tr>
-      <tr><td><b>⑫ 应急返航</b></td><td class="c num">必考</td><td>“飞往 3 号点，速度不超过 5m/s”</td><td>钟点法定向（30°×X），切姿态手动飞</td></tr>
-    </tbody>
-  </table>
-  </div>
-
-  <div class="grid g4" style="margin-top:12px">
-    <div class="box"><div class="k">最常考图形</div><div class="v">五边形 15%</div><div class="d">等边△12% · 梯形10% · 四边形9% · 六边形7% · 等腰直角7% · 直角△7%</div></div>
-    <div class="box"><div class="k">最常考转弯</div><div class="v">停止转弯 72%</div><div class="d">定点 19% · 协调 8%（＝不停留）</div></div>
-    <div class="box"><div class="k">最常考停留</div><div class="v">5 秒</div><div class="d">其次 3s、2s、6s；停留时间出现率 73%</div></div>
-    <div class="box"><div class="k">最常考循环</div><div class="v">闭合不循环 32%</div><div class="d">闭合循环 14%；“非循环才有完成动作”</div></div>
-  </div>
-
-  <div class="tip"><span class="lb">顺序</span>先吃下 <b>02 方位角</b> + <b>03 SOP</b>（这是全部题的地基），再练 <b>①⑥⑨</b> 常规题，最后补 <b>⑤⑦⑧</b> 特殊题。<b>③</b> 几乎每张卡都有，必须在 30 秒内算完。</div>
-</section>
-
-<!-- ============ 01 考试三关 ============ -->
-<section class="sec" id="exam">
-  <h2><span class="n">01</span>考试三关</h2>
-  <p class="lead">一场考试连续走完三关，全程在 LinkGCS 上操作 + 口述报告。</p>
-
-  <div class="tw">
-  <table>
-    <thead><tr><th style="width:9%">关卡</th><th style="width:26%">考官给你什么</th><th>你要做什么</th><th style="width:21%">过关标准</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><b>①<br>预规划</b><br><small>核心，占多数时间</small></td>
-        <td>一张题卡：图形 + 边长/内角 + 1 个经纬度 + 高度/速度/停留/循环 + 一条朝向条件</td>
-        <td>画闭合图形 → 旋转到正确朝向 → 摆好起飞点 → 平移经纬度 → 录全部参数 → 上传</td>
-        <td>图上方位角、距离、H 位置、经纬度、参数全对</td>
-      </tr>
-      <tr>
-        <td><b>②<br>重规划</b></td>
-        <td>飞机已在执行航线，考官口述指令（变点 / 变高 / 变速）</td>
-        <td>复述指令核对 → 改航线 → 上传 → 报告 → 执行 → 主动汇报飞行数据</td>
-        <td>复述无误，改完的点/高度/速度正确，会报告</td>
-      </tr>
-      <tr>
-        <td><b>③<br>应急返航</b></td>
-        <td>指定一个航点或返航点，要求速度上限</td>
-        <td>切姿态模式 → 用钟点法定向 → 手动转 + 推前进 → 到点减速悬停</td>
-        <td>方位角不过大，速度不超限，箭头停在点上</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-
-  <p><b>整场顺序：</b>预规划（审题 1′ → 作答 3′ → 检查 3′）→ 上传执行 → 重规划（变点 / 变高 / 变速）→ 到点暂停 → 应急返航（切姿态手动定向）。</p>
-
-  <h3>预规划的三段时间（宝典建议）</h3>
-  <div class="grid g3">
-    <div class="box"><div class="k">审题 1′</div><div class="d">图形形状、顺/逆时针、1 号点起始位置；参数是全局还是局部。</div></div>
-    <div class="box"><div class="k">作答 3′</div><div class="d">画图 → 旋转 → 摆 H → 平移 → 输参数。每步点“确认/生成”。</div></div>
-    <div class="box"><div class="k">检查 3′</div><div class="d">测方位角距离、核经纬度、核绿色执行航点列表。查完才上传。</div></div>
-  </div>
-
-  <div class="key"><span class="lb">默认参数</span>考官没要求时用：<b>航高 30 m、水平速度 3 m/s、垂直速度 3 m/s、悬停 3 s</b>。重规划新加的点也必须补成这套值，否则是 0。</div>
-</section>
-
-<!-- ============ 02 方位角 ============ -->
-<section class="sec" id="bearing">
-  <h2><span class="n">02</span>方位角基础（全部题的地基）</h2>
-  <p class="lead">这一节不熟，后面所有题型都是猜。花 20 分钟练到 5 秒一个。</p>
-
-  <h3>2.1 定义与归一化</h3>
-  <p>从<b>正北</b>起，<b>顺时针</b>转到目标方向的水平夹角，范围 <span class="f">0° ~ 360°</span>。</p>
-  <div class="grid g2">
-    <div class="box"><div class="k">超过 360</div><div class="v">一直减 360</div><div class="d">如 400° → 40°</div></div>
-    <div class="box"><div class="k">小于 0</div><div class="v">一直加 360</div><div class="d">如 −25° → 335°</div></div>
-  </div>
-
-  <h3>2.2 顺加逆减</h3>
-  <p>在原方向上<b>顺时针</b>转 → 加；<b>逆时针</b>转 → 减。</p>
-  <div class="tw"><table class="small tight">
-    <thead><tr><th>说法</th><th class="c">算法</th><th class="c">结果</th><th>记忆</th></tr></thead>
-    <tbody>
-      <tr><td>东偏南 20°</td><td class="c">90 + 20</td><td class="c num">110°</td><td>从东往南走是顺时针 → 加</td></tr>
-      <tr><td>东偏北 20°</td><td class="c">90 − 20</td><td class="c num">70°</td><td>从东往北走是逆时针 → 减</td></tr>
-      <tr><td>西偏北 20°</td><td class="c">270 + 20</td><td class="c num">290°</td><td>从西往北是顺时针 → 加</td></tr>
-      <tr><td>西偏南 20°</td><td class="c">270 − 20</td><td class="c num">250°</td><td>从西往南是逆时针 → 减</td></tr>
-      <tr><td>南偏东 25°</td><td class="c">180 − 25</td><td class="c num">155°</td><td>从南往东是逆时针 → 减</td></tr>
-      <tr><td>南偏西 25°</td><td class="c">180 + 25</td><td class="c num">205°</td><td>从南往西是顺时针 → 加</td></tr>
-      <tr><td>北偏东 15°</td><td class="c">0 + 15</td><td class="c num">15°</td><td>从北往东是顺时针 → 加</td></tr>
-      <tr><td>北偏西 15°</td><td class="c">360 − 15</td><td class="c num">345°</td><td>从北往西是逆时针 → 减</td></tr>
+      <tr><td class="c">1</td><td><b>方位角</b><br><small>全部题的通用语言</small></td><td>0~360 归一化、顺加逆减、"到"与"在"、反方向、夹角、顺逆判断</td><td>整道题差 180°，图形镜像，H 甩到反方向</td></tr>
+      <tr><td class="c">2</td><td><b>几何</b><br><small>把文字变成边和角</small></td><td>内角 → 转折角、勾股、等腰直角、30/60、正弦、时钟</td><td>画不出闭合图形，或边长算错、差几十米对不上</td></tr>
+      <tr><td class="c">3</td><td><b>软件四步</b><br><small>画 → 转 → 摆 → 移</small></td><td>相对坐标编辑器、夹角生成、旋转工具、起飞点快捷调整、平移工具</td><td>图对了但位置错，或干脆不知道点哪里</td></tr>
+      <tr><td class="c">4</td><td><b>条件翻译</b><br><small>举一反三的核心</small></td><td>把任何一句题面话，归到①②③④中的哪一件</td><td>遇到没见过的说法就慌，其实和做过的题一模一样</td></tr>
+      <tr><td class="c">5</td><td><b>口述与手飞</b><br><small>后两关</small></td><td>重规划话术与"速前高后"、返航钟点法</td><td>会做规划题，照样挂在后半场</td></tr>
     </tbody>
   </table></div>
-  <p><small>口诀：<b>“偏”字看转弯方向</b>——基准方位指向“偏”的那个字，是顺时针就加，是逆时针就减。</small></p>
 
-  <h3>2.3 反方向（用得最多）</h3>
-  <p><span class="f b big">原方向 &lt; 180° → 反方向 = 原 + 180°　｜　原方向 &gt; 180° → 反方向 = 原 − 180°</span></p>
-  <p>例：<span class="f">1-2 = 90°</span>，则 <span class="f">2-1 = 270°</span>；<span class="f">3-2 = 290°</span>，则 <span class="f">2-3 = 110°</span>。</p>
+  <div class="key"><span class="lb">阅读方式</span>01~04 是<b>能力课</b>，每节末尾有小练习；05 是<b>六道例题</b>，节节都在用前面四项能力；06 之后是<b>考试其余部分的操作</b>。基础弱就按顺序读，别跳。</div>
 
-  <h3>2.4 “到” 与 “在 / 位于 / 相对于”（最高频失分点）</h3>
-  <div class="warn"><span class="lb">必错点</span>
-  <b>“A 到 B”</b> → 写 <b>A-B</b>，起点在前。<br>
-  <b>“A 在 / 位于 / 相对于 B”</b> → 写 <b>B-A</b>，<b>后面那个点在前</b>（从 B 指向 A）。</div>
-  <div class="tw"><table class="small tight">
-    <thead><tr><th>题面</th><th class="c" style="width:20%">写成</th><th class="c" style="width:14%">为什么</th></tr></thead>
+  <h3>0.3 考试三关，你要交什么</h3>
+  <div class="tw"><table class="small">
+    <thead><tr><th style="width:9%">关卡</th><th style="width:24%">考官给你</th><th>你交什么</th></tr></thead>
     <tbody>
-      <tr><td>1 点到 2 点的航向为东偏南 15°</td><td class="c"><span class="f">1-2 = 105°</span></td><td class="c">“到” → 前点在前</td></tr>
-      <tr><td>2 点在 3 点的西偏北 20°</td><td class="c"><span class="f">3-2 = 290°</span></td><td class="c">“在” → 后点在前</td></tr>
+      <tr><td><b>预规划</b><br><small>审题 1′ 作答 3′ 检查 3′</small></td><td>一张题卡：图形 + 尺寸 + 一个经纬度 + 参数 + 一条朝向条件</td><td>画闭合图形 → 转正朝向 → 摆好 H → 平移到经纬度 → 录参数 → 上传</td></tr>
+      <tr><td><b>重规划</b></td><td>飞机已在飞，考官口头下指令（变点 / 变高 / 变速）</td><td>复述核对 → 改 → 上传 → 报告 → 执行 → 主动汇报数据</td></tr>
+      <tr><td><b>应急返航</b></td><td>指定一个点，要求速度上限</td><td>切姿态 → 用钟点法定向 → 手动飞过去 → 减速停住</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tip"><span class="lb">默认参数</span>题卡没写就用：<b>航高 30 m、水平速度 3 m/s、垂直速度 3 m/s、悬停 3 s</b>。重规划新加的点也要补成这套值。</div>
+</section>
+
+<!-- ============ 01 方位角 ============ -->
+<section class="sec" id="angle">
+  <h2><span class="n">01</span>能力①：方位角（不会这个，后面全废）</h2>
+  <p class="lead">这一节要练到<b>看到数字就能在脑子里转</b>。目标：任意两条边说方位角，5 秒内答出。</p>
+
+  <h3>1.1 定义与归一化</h3>
+  <p>从<b>正北</b>开始，<b>顺时针</b>转到目标方向的水平夹角，范围 <span class="f">0°~360°</span>。</p>
+  <div class="grid g2">
+    <div class="box"><div class="k">算出大于 360</div><div class="v">一直减 360</div><div class="d">400° → 40°　｜　725° → 5°</div></div>
+    <div class="box"><div class="k">算出小于 0</div><div class="v">一直加 360</div><div class="d">−25° → 335°　｜　−190° → 170°</div></div>
+  </div>
+  <div class="why"><b>为什么必须归一化：</b>软件输入框、考官口述、图上标注都只认 0~360。你写 −25 或 400，机器和人都不会认。</div>
+
+  <h3>1.2 顺加逆减：所有"偏"字都靠这条</h3>
+  <p>在某个方向上<b>顺时针</b>再转 → 加；<b>逆时针</b>再转 → 减。</p>
+  <div class="tw"><table class="small tight">
+    <thead><tr><th>说法</th><th class="c">算法</th><th class="c">结果</th><th>判断依据</th></tr></thead>
+    <tbody>
+      <tr><td>东偏南 20°</td><td class="c">90 + 20</td><td class="c num">110°</td><td>东 → 南 是顺时针</td></tr>
+      <tr><td>东偏北 20°</td><td class="c">90 − 20</td><td class="c num">70°</td><td>东 → 北 是逆时针</td></tr>
+      <tr><td>西偏北 20°</td><td class="c">270 + 20</td><td class="c num">290°</td><td>西 → 北 是顺时针</td></tr>
+      <tr><td>西偏南 20°</td><td class="c">270 − 20</td><td class="c num">250°</td><td>西 → 南 是逆时针</td></tr>
+      <tr><td>南偏东 25°</td><td class="c">180 − 25</td><td class="c num">155°</td><td>南 → 东 是逆时针</td></tr>
+      <tr><td>南偏西 25°</td><td class="c">180 + 25</td><td class="c num">205°</td><td>南 → 西 是顺时针</td></tr>
+      <tr><td>北偏东 15°</td><td class="c">0 + 15</td><td class="c num">15°</td><td>北 → 东 是顺时针</td></tr>
+      <tr><td>北偏西 15°</td><td class="c">360 − 15</td><td class="c num">345°</td><td>北 → 西 是逆时针</td></tr>
+    </tbody>
+  </table></div>
+  <div class="why"><b>为什么：</b>方位角顺时针增大，所以"往右（顺时针）偏"就是加，"往左偏"就是减。<b>别背表格，记这句。</b></div>
+
+  <h3>1.3 反方向（用得最多的一条）</h3>
+  <div class="f b big">原方向 &lt; 180° → 反方向 = 原 + 180°　｜　原方向 &gt; 180° → 反方向 = 原 − 180°</div>
+  <p><span class="f">1-2 = 90°</span> → <span class="f">2-1 = 270°</span>；<span class="f">3-2 = 290°</span> → <span class="f">2-3 = 110°</span>。</p>
+  <div class="why"><b>什么时候用：</b>① 题目给"起飞点到 X 点"的方向，你要填的是 "X-H"；② 题给 <span class="f">3-1</span>，你要用 <span class="f">1-3</span> 去旋转；③ 已知 <span class="f">H-1</span> 要算 <span class="f">1-H</span>。<b>看不见的反方向，就是最容易丢分的地方。</b></div>
+
+  <h3>1.4 "到" 与 "在 / 位于 / 相对于"</h3>
+  <div class="warn"><span class="lb">必错点</span><b>"A 到 B"</b> → 写 <b>A-B</b>（起点在前）。<b>"A 在 / 位于 / 相对于 B"</b> → 写 <b>B-A</b>（<b>后面那个点在前</b>）。</div>
+  <div class="tw"><table class="small tight">
+    <thead><tr><th>题面</th><th class="c" style="width:22%">写成</th><th class="c" style="width:16%">为什么</th></tr></thead>
+    <tbody>
+      <tr><td>1 点到 2 点的航向为东偏南 15°</td><td class="c"><span class="f">1-2 = 105°</span></td><td class="c">"到" → 前点在前</td></tr>
+      <tr><td>2 点在 3 点的西偏北 20°</td><td class="c"><span class="f">3-2 = 290°</span></td><td class="c">"在" → 后点在前</td></tr>
       <tr><td>H 点（起飞点）位于 4 点 SE 偏 E 10°</td><td class="c"><span class="f">4-H = 125°</span></td><td class="c">从 4 点看 H</td></tr>
       <tr><td>5 点相对于 6 点的方位角为 NW 偏 W 5°</td><td class="c"><span class="f">6-5 = 310°</span></td><td class="c">从 6 点看 5 点</td></tr>
-      <tr><td>3 到 1 的指向角度为 160°</td><td class="c"><span class="f">3-1 = 160°</span></td><td class="c">旋转时用 1-3 = 340°</td></tr>
     </tbody>
   </table></div>
+  <div class="why"><b>一句话理解：</b>方位角是"从谁身上看向谁"。句子里"看"的那个人，就是连线前面的那个点。</div>
 
-  <h3>2.5 方位词速查</h3>
+  <h3>1.5 方位词速查</h3>
   <p><b>八方位：</b>北 0 · 东北 45 · 东 90 · 东南 135 · 南 180 · 西南 225 · 西 270 · 西北 315</p>
   <p><b>十六方位（每档 22.5°）：</b>N 0 · NNE 22.5 · NE 45 · ENE 67.5 · E 90 · ESE 112.5 · SE 135 · SSE 157.5 · S 180 · SSW 202.5 · SW 225 · WSW 247.5 · W 270 · WNW 292.5 · NW 315 · NNW 337.5</p>
 
-  <h3>2.6 夹角公式</h3>
-  <p>本质：<b>∠HAB 由 A-H 与 A-B 两条边构成</b>，已知一条，求另一条。</p>
-  <div class="f b big">待求航向 = 已知航向 ± 夹角度数　（已知 → 待求 顺时针取 +，逆时针取 −）</div>
+  <h3>1.6 夹角：题目最爱考的一种"转弯"</h3>
+  <p>本质：<b>∠HAB 是同一顶点 A 上两条射线的差</b>——一条是 A-H，一条是 A-B。已知一条，求另一条。</p>
+  <div class="f b big">待求 = 已知 ± 夹角　（从已知边转到待求边是顺时针用 +，逆时针用 −）</div>
   <ul>
-    <li>已知给的是 <span class="f">B-A</span> 或 <span class="f">H-A</span>，先算反方向得到 <span class="f">A-B</span> / <span class="f">A-H</span>。</li>
-    <li>夹角最大 180°，算出超过 180° 说明取反了：用 360° 相减。</li>
+    <li>题给的是 <span class="f">B-A</span> 或 <span class="f">H-A</span>，先算反方向得到 <span class="f">A-B</span> / <span class="f">A-H</span>。</li>
+    <li>夹角不会超过 180°；算出比 180° 大，说明符号取反了。</li>
   </ul>
-  <div class="tip"><span class="lb">例</span>已知 <span class="f">2-H = 135°</span>，且 ∠H23 中从 2-H 到 2-3 是顺时针 110° → <span class="f">2-3 = 135 + 110 = 245°</span>。</div>
+  <div class="tip"><span class="lb">例</span><span class="f">2-H = 135°</span>，从 2-H 转到 2-3 是顺时针 110° → <span class="f">2-3 = 135 + 110 = 245°</span>。</div>
 
-  <h3>2.7 顺 / 逆时针怎么判</h3>
-  <p>航线至少 <b>3 个航点</b>才有顺逆概念。做法：<b>由 1 到 2 做延长线并画箭头</b>，看 3 号点在箭头<b>左</b>侧还是<b>右</b>侧。</p>
+  <h3>1.7 顺 / 逆时针怎么判</h3>
+  <p>至少 3 个航点才有顺逆。做法：<b>把 1→2 延长出去画个箭头</b>，看 3 号点在箭头的左边还是右边。</p>
   <div class="grid g2">
-    <div class="box"><div class="k">3 点在左侧</div><div class="v">逆时针</div><div class="d">夹角法画 2-3 时输入内角要带 <b>负号 −</b></div></div>
-    <div class="box"><div class="k">3 点在右侧</div><div class="v">顺时针</div><div class="d">夹角法输入内角用 <b>正号 +</b>（直接填正数）</div></div>
+    <div class="box"><div class="k">3 点在左侧</div><div class="v">逆时针</div><div class="d">画图时夹角输入<b>负数</b>；转折角用"减"</div></div>
+    <div class="box"><div class="k">3 点在右侧</div><div class="v">顺时针</div><div class="d">画图时夹角输入<b>正数</b>；转折角用"加"</div></div>
   </div>
+  <div class="why"><b>为什么顺逆这么重要：</b>它决定两件事——① 夹角法画图时的正负号；② 用一条已知边推其余所有边时是加还是减。<b>顺逆搞反，整张图镜像。</b></div>
 
-  <h3>2.8 正多边形内角</h3>
+  <h3>1.8 现在就练（10 秒一题，答案折叠在下面）</h3>
+  <ol class="small">
+    <li>东偏北 35° = ?</li>
+    <li>西南偏南 10° = ?</li>
+    <li>1-2 = 200°，2-1 = ?</li>
+    <li>4 点在 3 点正西，写 3-4 还是 4-3？等于多少？</li>
+    <li>H-3 = 60°，起飞点要填的第 3 个航点角度是 3-H = ?</li>
+  </ol>
+  <details><summary>看答案</summary><div class="a">① 90−35 = <b>55°</b>　② 西南 225，往南（180）是逆时针 → 225−10 = <b>215°</b>（也可读作南偏西 35+? 直接用减法即可）　③ 200+180 = 380−360 = <b>20°</b>　④ 写 <b>3-4</b>，"在"后面那个点在前 = <b>270°</b>　⑤ 60+180 = <b>240°</b></div></details>
+</section>
+<!-- ============ 02 几何 ============ -->
+<section class="sec" id="geo">
+  <h2><span class="n">02</span>能力②：几何——把文字变成边和角</h2>
+  <p class="lead">软件不会替你想几何。你唯一要做的，是<b>把"内角"翻译成"下一段的方位角"</b>，然后交给编辑器生成。</p>
+
+  <h3>2.1 一条公式，解决所有闭合图形</h3>
+  <div class="f b big">沿航线前进，过一个顶点：顺时针 → 下一段 = 本段 + (180° − 内角)<br>逆时针 → 下一段 = 本段 − (180° − 内角)</div>
+  <p>把 <span class="f">180° − 内角</span> 叫"<b>转折角</b>"。它是方位角每过一个顶点变化多少。</p>
+  <div class="tw"><table class="small tight">
+    <thead><tr><th>图形</th><th class="c">内角</th><th class="c">转折角</th><th>已知一条边后的走向（顺时针）</th></tr></thead>
+    <tbody>
+      <tr><td>等边三角形</td><td class="c">60°</td><td class="c num">120°</td><td>30 → 150 → 270 → 30（每段 +120）</td></tr>
+      <tr><td>正方形</td><td class="c">90°</td><td class="c num">90°</td><td>30 → 120 → 210 → 300</td></tr>
+      <tr><td>正六边形</td><td class="c">120°</td><td class="c num">60°</td><td>30 → 90 → 150 → 210 → 270 → 330</td></tr>
+      <tr><td>正五边形</td><td class="c">108°</td><td class="c num">72°</td><td>30 → 102 → 174 → 246 → 318</td></tr>
+    </tbody>
+  </table></div>
+  <div class="why"><b>为什么：</b>方位角顺时针增大。你顺时针绕图形走，每到一个顶点就要把"方向盘"往右打 <span class="f">180°−内角</span>，所以是加；逆时针走就是往左打，用减。<b>内角越大，转折越小</b>——六边形（120°）每段只转 60°，三角形（60°）每段要转 120°，符合直觉。</div>
+
+  <h3>2.2 内角不用记，会算就行</h3>
   <div class="f b big">内角和 = (N − 2) × 180°　→　每个内角 = (N − 2) × 180° ÷ N</div>
   <div class="tw"><table class="small tight">
-    <thead><tr><th class="c">边数 N</th><th class="c">3</th><th class="c">4</th><th class="c">5</th><th class="c">6</th><th class="c">8</th><th class="c">10</th><th class="c">12</th></tr></thead>
+    <thead><tr><th class="c">边数</th><th class="c">3</th><th class="c">4</th><th class="c">5</th><th class="c">6</th><th class="c">8</th><th class="c">10</th><th class="c">12</th></tr></thead>
     <tbody>
-      <tr><td class="c"><b>内角</b></td><td class="c num">60°</td><td class="c num">90°</td><td class="c num">108°</td><td class="c num">120°</td><td class="c num">135°</td><td class="c num">144°</td><td class="c num">150°</td></tr>
-      <tr><td class="c">顺时针</td><td class="c">+</td><td class="c">+</td><td class="c">+</td><td class="c">+</td><td class="c">+</td><td class="c">+</td><td class="c">+</td></tr>
-      <tr><td class="c">逆时针</td><td class="c">−</td><td class="c">−</td><td class="c">−</td><td class="c">−</td><td class="c">−</td><td class="c">−</td><td class="c">−</td></tr>
+      <tr><td class="c"><b>内角</b></td><td class="c num">60</td><td class="c num">90</td><td class="c num">108</td><td class="c num">120</td><td class="c num">135</td><td class="c num">144</td><td class="c num">150</td></tr>
+      <tr><td class="c">转折角</td><td class="c num">120</td><td class="c num">90</td><td class="c num">72</td><td class="c num">60</td><td class="c num">45</td><td class="c num">36</td><td class="c num">30</td></tr>
     </tbody>
   </table></div>
-  <p><small>画法：先画 1-2 边（方位角尽量和题图一致），编辑器切“夹角”模式输入内角 → 反复点<b>生成</b>，直到最后一个点与 1 号点重合（航线闭合）。</small></p>
+  <p><small>正多边形还有一条好用的性质：<b>转折角 = 360° ÷ N</b>。六边形 60°、八边形 45°，一眼可得。</small></p>
 
-  <h3>2.9 时针分针</h3>
-  <div class="f b big">时针 = 30°×H + 0.5°×M　｜　分针 = 6°×M　｜　夹角 = |分针 − 时针|（&gt;180° 用 360° 减）</div>
-  <ul>
-    <li>时针 60 分钟走 30° → 0.5°/分；分针 60 分钟走 360° → 6°/分。</li>
-    <li>题面说<b>“航向 / 方向为 X 点 Y 分”</b> → 直接取<b>时针</b>位置 = <span class="f">30X + 0.5Y</span>。</li>
-    <li>题面说<b>“X 点 Y 分时针与分针的夹角”</b> → 求夹角值，再当夹角条件用。</li>
-  </ul>
-  <div class="tip"><span class="lb">例</span>2:30 → 时针 75°，分针 180°，夹角 105°。1:48 → 时针 54°，分针 288°，差 234° → 360−234 = <b>126°</b>。</div>
+  <h3>2.3 三个必须熟练的特殊图形</h3>
+  <div class="grid g3">
+    <div class="box"><div class="k">正方形</div><div class="v">转折 90°</div><div class="d">边长相等；对角线 = 边长 × 1.414；"正方形变蝴蝶"靠交换两个航点。</div></div>
+    <div class="box"><div class="k">等腰直角三角形</div><div class="v">90° / 45° / 45°</div><div class="d">转折依次 90°、135°、135°；斜边 = 直角边 × 1.414。</div></div>
+    <div class="box"><div class="k">直角梯形</div><div class="v">两个 90° + 一个 135°</div><div class="d">先找两条平行边；135° 处转折 45°，于是那段是 45° 斜边、水平位移 = 垂直高度。</div></div>
+  </div>
+  <div class="why"><b>梯形怎么想：</b>题目说"直角梯形，1-4 = 75 米，∠2 = 135°"，其实是在告诉你：左侧竖边 75 米、右下角被"切掉"了 45°，所以那条斜边一定是 <b>45° 方向、水平位移也是 75 米</b>。顶边长度 = 底边 + 75。整道题的几何在这一步就解完了。<b>看到 135° 就想 45°，看到 120° 就想 60°，看到 150° 就想 30°。</b></div>
 
-  <h3>2.10 几何速算（算边长用）</h3>
-  <div class="tw"><table class="small tight">
-    <tbody>
-      <tr><th style="width:26%">勾股定理</th><td><span class="f">a² + b² = c²</span>；3-4-5、5-12-13、6-8-10 常见整数解</td></tr>
-      <tr><th>45° 等腰直角</th><td>斜边 = 直角边 × 1.414；两直角边相等</td></tr>
-      <tr><th>30°-60°-90°</th><td>三边比 <span class="f">1 : √3 : 2</span></td></tr>
-      <tr><th>正弦定理</th><td><span class="f">a / sinA = b / sinB = c / sinC</span>（已知两角一边，或两边一对角求方位）</td></tr>
-      <tr><th>余弦定理</th><td><span class="f">c² = a² + b² − 2ab·cosC</span>（已知两边夹角求第三边）</td></tr>
-      <tr><th>正六边形</th><td>边长 = 中心到顶点距离 = 外接圆半径；对角线 √3 × 边长</td></tr>
-    </tbody>
-  </table></div>
-  <p><small>考试现场用计算器（手机科学计算器即可），三角函数要切到 <b>Deg（角度制）</b>。</small></p>
-
-  <h3>2.11 坐标轴转换</h3>
-  <p>题卡给的图若带坐标轴（X/Y 箭头），先把图上的轴方向翻译成“北”：<b>图上向上为北 = 0°</b>，然后按箭头方向数出每条边相对“上”的顺时针角。例：图内 X 轴向上、Y 轴向右，则一条沿 X 正方向的边 = 0°，沿 Y 正方向 = 90°，反向 = 180°。</p>
-  <div class="key"><span class="lb">易错</span>“假设方位角”画的图（随便给的 1-2 朝向）<b>不能</b>用真实方位角去定位 H。必须<b>先旋转成真实朝向，再摆 H</b>。</div>
-</section>
-<!-- ============ 03 预规划 SOP ============ -->
-<section class="sec" id="sop">
-  <h2><span class="n">03</span>预规划 SOP（照做就行）</h2>
-  <p class="lead">顺序不能乱：<b>画图 → 旋转 → 插避让点 → 摆 H → 平移经纬度 → 录参数 → 检查 → 上传</b>。乱一步就要重来。</p>
-
-  <ol class="steps">
-    <li><b>审题（1 分钟）</b><span class="body">
-      圈出四样东西：① 图形是什么、几条边、边长/内角；② 顺时针还是逆时针、1 号点在哪个角；③ 朝向条件（哪条边被固定）；④ 参数是“整条航线”还是“某个点”的，循环几圈，哪个点给了经纬度、有没有正负号。
-    </span></li>
-    <li><b>撒两个点</b><span class="body">
-      随便点一个 H，随便点一个 1 号点。位置不用管，最后都会平移/重摆。
-    </span></li>
-    <li><b>画闭合图形</b><span class="body">
-      打开<b>相对坐标编辑器</b>：选基准点 + 插入序号，填<b>方位角 + 距离</b> → 点<b>生成</b>；或用<b>夹角</b>模式填内角（逆时针带负号）反复生成，直到最后一点与 1 号点重合。<br>
-      要交叉/不连续的图形（如蝴蝶形）：用<b>距离 0</b> 插入一个与上一点重合的点，再右键调顺序。
-    </span></li>
-    <li><b>旋转到正确朝向</b><span class="body">
-      由条件算出某条边（通常 1-2）的<b>真实方位角</b> → 用<b>旋转工具</b>输入该方位角 → 确认。图形形状不变，整体转动。
-    </span></li>
-    <li><b>（有避让点才做）插入绕飞点</b><span class="body">
-      以 1 号点为基准，按“最后一段飞行的<b>反方向</b> + 该段距离”插入新点 → 原 1 号变 2 号，新点成为 1 号（避让点）。该点高度单独设成题给的避让高度。
-    </span></li>
-    <li><b>摆起飞点 H</b><span class="body">
-      选中 H，用面板里的<b>快捷调整</b>：起飞点位于第 <span class="kbd">N</span> 个航点、距离、角度 → 等价于输入 <b>N-H 的方位角 + 距离</b>。<br>
-      <b>所有 H 条件最终都要化成“N-H 方位角 + 距离”</b>再填。
-    </span></li>
-    <li><b>平移经纬度</b><span class="body">
-      右侧<b>平移工具</b>：基准点选题里给坐标的那个点 → 填纬度/经度 → 平移。若前面插了避让点，基准点要选 <b>2 号点</b>（题卡上的“图形 1 号点”已经是你的 2 号点）。
-    </span></li>
-    <li><b>录参数</b><span class="body">
-      左侧航点面板：高度、水平速度、到达速度、垂直速度、悬停时间、机头指向；全局项在<b>航线设置</b>里改：整体高度、循环模式、转弯模式、完成动作。逐点必改，别只改一个点。
-    </span></li>
-    <li><b>检查 + 上传（3 分钟）</b><span class="body">
-      用<b>测距工具</b>或图上的航段标签抽检方位角/距离 → 对照题卡逐条核 → <b>上传</b> → 设置<b>开始执行点</b>。
-    </span></li>
-  </ol>
-
-  <h3>软件控件对照表（找不到按钮就看这里）</h3>
+  <h3>2.4 算边长：先判断用哪把"刀"</h3>
   <div class="tw"><table class="small">
-    <thead><tr><th style="width:30%">要做的事</th><th>在哪 / 怎么点</th></tr></thead>
+    <thead><tr><th style="width:24%">已知</th><th style="width:22%">用什么</th><th>公式</th></tr></thead>
     <tbody>
-      <tr><td>按方位角+距离加点</td><td><b>相对坐标编辑器</b>：基准点 / 插入序号 → 方位角 → 距离 → <b>生成</b></td></tr>
-      <tr><td>按内角画闭合图形</td><td>编辑器切<b>夹角</b>模式 → 内角（逆时针加 −）→ 反复<b>生成</b>至闭合</td></tr>
-      <tr><td>旋转整条图形</td><td><b>旋转工具</b> → 输入已知边的方位角 → 确认</td></tr>
-      <tr><td>把起飞点摆到位</td><td>选中 H → <b>快捷调整：起飞点位于第 N 个航点 / 距离 / 角度</b></td></tr>
-      <tr><td>整体平移到正确经纬度</td><td>右侧<b>平移工具</b>：基准点 + 纬度 + 经度 → 平移</td></tr>
-      <tr><td>量两点方位角/距离</td><td>右侧<b>测距工具</b>（选航点1/航点2）；图上每段也有方位角+距离标签</td></tr>
-      <tr><td>改单点参数</td><td>左侧航点面板：高度 / 水平速度 / 到达速度 / 垂直速度 / 悬停时间</td></tr>
-      <tr><td>改整条航线/循环/转弯</td><td><b>航线设置</b>（整体高度、航点速度、循环、转弯模式、完成动作）</td></tr>
-      <tr><td>加中间点 / 删点 / 换顺序</td><td>选中航点右键：<b>向后添加</b> / <b>删除航点</b>；或用<b>反序工具</b>改顺逆</td></tr>
-      <tr><td>提交航线</td><td><b>上传</b> → 设<b>开始执行点</b> → 执行</td></tr>
+      <tr><td>两条直角边</td><td>勾股定理</td><td><span class="f">c = √(a² + b²)</span>；3-4-5、6-8-10、5-12-13 直接认</td></tr>
+      <tr><td>45° 直角三角形</td><td>等腰直角</td><td>斜边 = 直角边 × 1.414；两腰相等</td></tr>
+      <tr><td>30° / 60°</td><td>特殊角</td><td>三边比 <span class="f">1 : √3 : 2</span>（短边 × 1.732 = 长直角边）</td></tr>
+      <tr><td>两边 + 一个对角（求方位或第三边）</td><td>正弦定理</td><td><span class="f">a / sinA = b / sinB = c / sinC</span></td></tr>
+      <tr><td>两边 + 夹角（求第三边）</td><td>余弦定理</td><td><span class="f">c² = a² + b² − 2ab·cosC</span></td></tr>
+      <tr><td>H 到两点的距离 + 夹角（求 H 到第三点）</td><td>正弦定理</td><td>先画三角形，再 <span class="f">sin</span> 出那个角，最后加减到方位角上</td></tr>
+    </tbody>
+  </table></div>
+  <div class="tip"><span class="lb">心算</span>直角边相等时斜边 ≈ 边 × 1.414：30 → 42.4；75 → 106.1；100 → 141.4；200 → 282.8。这几个数背下来，梯形题能省 30 秒。</div>
+
+  <h3>2.5 时钟题：只是另一种方位角</h3>
+  <div class="f b big">时针 = 30°×H + 0.5°×M　｜　分针 = 6°×M　｜　夹角 = |分针 − 时针|（&gt; 180° 用 360° 减）</div>
+  <ul>
+    <li>时针 60 分钟走 30°，所以 <b>0.5°/分</b>；分针 60 分钟走 360°，所以 <b>6°/分</b>。</li>
+    <li>题说<b>"航向 / 方向为 X 点 Y 分"</b> → 取<b>时针</b>位置 <span class="f">30X + 0.5Y</span>。</li>
+    <li>题说<b>"X 点 Y 分时针与分针的夹角"</b> → 先算夹角，再当夹角条件用。</li>
+  </ul>
+  <div class="why"><b>为什么时针要加 0.5M：</b>时针不是"整点才动"，它一直在慢慢走。1:48 时时针已经走过 48 分钟，多转了 24°，所以是 30+24 = 54°，而不是 30°。忘了这 0.5，答案就错 24°。</div>
+
+  <h3>2.6 图上带坐标轴怎么办</h3>
+  <p>把"图上的上下左右"翻译成"东南西北"：<b>图上向上 = 北 = 0°</b>，然后按箭头方向数过去。例如图上 X 轴向上、Y 轴向右，则沿 X 正方向 = 0°，沿 Y 正方向 = 90°，反向各 +180°。</p>
+
+  <h3>2.7 小练习</h3>
+  <ol class="small">
+    <li>正八边形，内角多少？顺时针每段加多少？</li>
+    <li>等腰直角三角形，直角边 200 米，斜边多少？</li>
+    <li>直角梯形上底 275、下底 200、高 75，斜腰（右下）方位角多少度、多长？</li>
+  </ol>
+  <details><summary>看答案</summary><div class="a">① 内角 135°，转折 45°。② 200 × 1.414 = <b>282.8 米</b>。③ 45°（水平位移 75 = 高度 75），长度 75 × 1.414 = <b>106.1 米</b>。</div></details>
+</section>
+
+<!-- ============ 03 软件四步 ============ -->
+<section class="sec" id="soft">
+  <h2><span class="n">03</span>能力③：软件四步法（画 → 转 → 摆 → 移）</h2>
+  <p class="lead">软件只用四步。难点不在按钮，而在<b>为什么必须是这个顺序</b>。</p>
+
+  <h3>3.1 四步与顺序的道理</h3>
+  <ol class="steps">
+    <li><b>画</b>：先随便放一个 H、一个 1 号点，用相对坐标编辑器把图形画闭合。<span class="body">形状对就行，摆在哪里、朝哪个方向都无所谓。</span></li>
+    <li><b>转</b>：算出题里那条"被固定的边"的真实方位角，用旋转工具把整张图转过去。<span class="body">转完之后，图上的方位角才是真的。</span></li>
+    <li><b>摆</b>：用"起飞点位于第 N 个航点 + 距离 + 角度"把 H 摆到位。<span class="body">填的一定是 <b>N-H</b> 的方位角。</span></li>
+    <li><b>移</b>：用平移工具把图整体挪到真实经纬度。<span class="body">H 会跟着一起挪，相对关系不变。</span></li>
+  </ol>
+  <div class="warn"><span class="lb">顺序铁律</span>必须<b>先转、后摆</b>。因为在没旋转的图上，1-2 的方位角是"假"的（随便给的），你却用真实方位去摆 H，H 一定偏。<b>这就是最常见的整题崩盘原因。</b></div>
+  <div class="why"><b>为什么平移放在最后：</b>平移只改变"绝对位置"，不改变"相对关系"。所以你可以先在某处把形状、朝向、H 都调完美，最后一键搬到真实坐标，一次成功。</div>
+
+  <h3>3.2 每一步：点哪里 + 怎么算做对</h3>
+  <div class="tw"><table class="small">
+    <thead><tr><th style="width:12%">步骤</th><th style="width:40%">操作</th><th>做对的判断标准</th></tr></thead>
+    <tbody>
+      <tr><td><b>画</b></td><td>相对坐标编辑器：基准点 / 插入序号 → 方位角 + 距离 → <b>生成</b>；或切<b>夹角</b>模式填内角（逆时针填负数）反复生成至闭合</td><td>最后一个点与 1 号点重合、图上每段都显示正确的长度</td></tr>
+      <tr><td><b>转</b></td><td><b>旋转工具</b> → 输入那条已知边的方位角 → 确认</td><td>用测距工具量这条边，方位角 = 题给值</td></tr>
+      <tr><td><b>摆</b></td><td>选中 H → <b>起飞点位于图形的第 N 个航点</b> + 距离 + 角度</td><td>量 N-H 的方位角与距离，与换算结果一致</td></tr>
+      <tr><td><b>移</b></td><td><b>平移工具</b>：基准点 + 纬度 + 经度 → 平移</td><td>该点经纬度与题卡完全一致（注意秒）</td></tr>
+      <tr><td><b>参数</b></td><td>左侧面板逐点改；整条航线用<b>航线设置</b></td><td>绿色执行航点列表里逐条核对无误</td></tr>
+      <tr><td><b>交卷</b></td><td><b>上传</b> → 设<b>开始执行点</b></td><td>考官看你的屏幕能对上题卡</td></tr>
     </tbody>
   </table></div>
 
-  <div class="key"><span class="lb">高度字段</span>左侧面板有“航线整体相对地面 / 相对于上个航点”的切换：<b>相对地面</b> = 绝对高度（题里说“相对地面高度”就用它）；<b>相对于上个航点</b> = 升/降多少（重规划“降高 5m”就用它）。</div>
-  <div class="warn"><span class="lb">顺序铁律</span>必须<b>先旋转、后摆 H</b>。在“假设方位角”的图上按真实方位摆 H，H 一定是错的。</div>
+  <h3>3.3 参数分三类，别混</h3>
+  <div class="grid g3">
+    <div class="box"><div class="k">整条航线</div><div class="v">航线设置</div><div class="d">整体高度、航点速度、循环次数、转弯模式、完成动作。题说"整体 / 所有航点"就用它。</div></div>
+    <div class="box"><div class="k">分段</div><div class="v">逐点改</div><div class="d">"1、2、3 点高度 80，4、5、6 点高度 50"。</div></div>
+    <div class="box"><div class="k">单点</div><div class="v">逐点改</div><div class="d">"4 点为停止转弯，其余协调转弯"。</div></div>
+  </div>
+  <div class="key"><span class="lb">三个必查</span>① 水平、垂直速度<b>两个都要改</b>；② "起飞点高度为航线高度"要把 H 也改；③ 协调转弯时停留时间无效（停止转弯 = 定点转弯 = 悬停，是同一个东西）。</div>
+
+  <h3>3.4 五个必须会的小操作</h3>
+  <ul>
+    <li><b>距离 0 插点</b>：以某点为基准、任意角度、<b>0 米</b>插入，可造出"和上一点重合的点"，用来做蝴蝶形、或让 H 临时借一个点。</li>
+    <li><b>右键【向后添加】/【删除航点】</b>：加中间点、删点、把 3 号变成 4 号，全在这。</li>
+    <li><b>反序工具</b>：图形顺逆画反了，一键改过来，不用重画。</li>
+    <li><b>测距工具</b>：量任意两点的方位角与距离——你的"验算器"。</li>
+    <li><b>坐标开关</b>：打开后新点按经纬度插入（双坐标题要用），<b>用完立刻关</b>，否则后面的点全部重合。</li>
+  </ul>
+
+  <h3>3.5 60 秒自检</h3>
+  <p>量三段：<b>题给的那条固定边</b>（验朝向）、<b>N-H</b>（验起飞点）、<b>最长的一条边</b>（验比例）。三段都对，再上传。</p>
 </section>
 
-<!-- ============ 04 旋转条件 ============ -->
-<section class="sec" id="rot">
-  <h2><span class="n">04</span>题型 · 旋转条件（决定图形朝向）</h2>
-  <p class="lead">题卡里“航向（或位置要求）”那一条，作用只有一个：<b>算出某条边的真实方位角，然后用旋转工具转过去。</b></p>
+<!-- ============ 04 条件翻译 ============ -->
+<section class="sec" id="trans">
+  <h2><span class="n">04</span>能力④：条件翻译（举一反三的核心）</h2>
+  <p class="lead">题面写法可以无穷多，但<b>归宿只有三条线</b>：朝向、H、位置。见到任何一句条件，先问自己"它在说四件事里的哪一件？"</p>
 
-  <div class="tw">
-  <table>
-    <thead><tr><th style="width:26%">题面写法</th><th style="width:38%">换算</th><th>动作</th></tr></thead>
-    <tbody>
-      <tr>
-        <td><b>① 直接给一条边</b><br>“3 到 1 的指向角度为 160°”<br>“3 点到 2 点 215° 方向”</td>
-        <td><span class="f">3-1 = 160°</span> → 若要 1-3，用<span class="f">1-3 = 340°</span><br><span class="f">3-2 = 215°</span> → <span class="f">2-3 = 35°</span></td>
-        <td>把这条边转到该方位角</td>
-      </tr>
-      <tr>
-        <td><b>② 点在方向 + 距离</b><br>“4 点在 3 点 NE 方向 140 米处”</td>
-        <td><span class="f">3-4 = 45°</span>（顺带核对边长 140m）</td>
-        <td>旋转到 45°</td>
-      </tr>
-      <tr>
-        <td><b>③ 夹角（单）</b><br>“∠H31=30°（起飞点在图形内侧）”<br>“∠H12=30°”</td>
-        <td>先算 H-1 / H-3 或 1-H，再 <span class="f">待求 = 已知 ± 30°</span></td>
-        <td>旋转 + 用同一条条件摆 H</td>
-      </tr>
-      <tr>
-        <td><b>④ 双夹角</b><br>“∠H12=30°，∠H14=120°”</td>
-        <td>两个角都基于同一条已知边 → 分别加减，得到两条边方位角</td>
-        <td>先旋转，再摆 H（两射线交会）</td>
-      </tr>
-      <tr>
-        <td><b>⑤ 航向异同</b><br>“2-3 与 H-1 航向相同 / 相反（相向）”</td>
-        <td>相同 → <span class="f">2-3 = H-1</span><br>相反 → <span class="f">2-3 = H-1 ± 180°</span></td>
-        <td>算出 2-3 后旋转</td>
-      </tr>
-      <tr>
-        <td><b>⑥ 风向（15%）</b><br>“西北风，2-3 为逆风”“5 到 4 正右侧风”<br>“3 位于 2 点正下风”</td>
-        <td>风向 F = <b>风的来向</b>（西北风 F=315°）<br>
-          <span class="f">顺风 = F + 180</span>　<span class="f">逆风 = F</span><br>
-          <span class="f">左侧风 = F + 90</span>　<span class="f">右侧风 = F − 90</span><br>
-          正下风 = 顺风 = F+180；正上风 = 逆风 = F</td>
-        <td>得出该边方位角后旋转</td>
-      </tr>
-      <tr>
-        <td><b>⑦ 钟点 / 时针分针</b><br>“A-B 航向为 3 点 20 分（时针）”<br>“2 点 30 分时针与分针的夹角”</td>
-        <td>“航向为 X 点 Y 分” → <span class="f">30X + 0.5Y</span><br>“夹角” → 先算夹角值，再当③用</td>
-        <td>得出方位角后旋转</td>
-      </tr>
-      <tr>
-        <td><b>⑧ 图形理解</b><br>“H 到 5、6 距离相等且等于边长”<br>“H 平分 ∠612”“H 在图形中心”<br>“该边中点”“垂直于某边”</td>
-        <td>用几何关系推出角度：等边→60°，等腰直角→45°/90°，正方形→45° 对角线，中心/角平分→减半</td>
-        <td>推出的角度当①②③用</td>
-      </tr>
-      <tr>
-        <td><b>⑨ 坐标轴</b><br>图上带 X / Y 箭头</td>
-        <td>“向上为北”读角度：沿 X 正方向、沿 Y 正方向各是多少度</td>
-        <td>读出某边方位角后旋转</td>
-      </tr>
-      <tr>
-        <td><b>⑩ 双航点坐标</b><br>A、B 两点经纬度</td>
-        <td>用坐标画出 A、B → 图上读 <b>A-B 的方位角与距离</b> → 这个方位角就是真实朝向</td>
-        <td><b>不需要旋转</b>，直接按 A-B 画图</td>
-      </tr>
-      <tr>
-        <td><b>⑪ 逆时针图形</b></td>
-        <td>夹角法输入内角时全部加负号</td>
-        <td>画图阶段处理，不影响旋转</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="model">
+    <div class="m"><span class="n">A</span><div class="t">它影响"朝向"</div><div class="d">→ 你要得到<b>某一条边的方位角</b>，然后用旋转工具。</div></div>
+    <div class="m"><span class="n">B</span><div class="t">它影响"H 的位置"</div><div class="d">→ 你要得到 <b>N-H 的方位角 + 距离</b>，然后填起飞点快捷调整。</div></div>
+    <div class="m"><span class="n">C</span><div class="t">它影响"绝对位置"</div><div class="d">→ 你要用某点的经纬度做<b>平移</b>。</div></div>
+    <div class="m"><span class="n">D</span><div class="t">它在说"参数"</div><div class="d">→ 照抄进左侧面板 / 航线设置，注意单位与作用范围。</div></div>
   </div>
 
-  <h3>风向速查（最容易记混，背这张）</h3>
+  <h3>4.1 朝向类：本质只有三种</h3>
+  <div class="tw"><table class="small">
+    <thead><tr><th style="width:32%">题面写法</th><th style="width:14%">本质</th><th>你做什么</th></tr></thead>
+    <tbody>
+      <tr><td>"3 到 1 的指向角 160°"</td><td>直接给方位</td><td><span class="f">3-1 = 160</span>，要用时取 <span class="f">1-3 = 340</span></td></tr>
+      <tr><td>"4 点在 3 点 NE 方向 140 米"</td><td>直接给方位</td><td><span class="f">3-4 = 45</span>，顺带核对边长 140</td></tr>
+      <tr><td>"1 到 2 的航向为北偏东 30°"</td><td>直接给方位</td><td><span class="f">1-2 = 30</span>，直接用它画第一条边</td></tr>
+      <tr><td>"∠H12 = 30°（起飞点在图形内侧）"</td><td>给角度关系</td><td>先求 H-1，再 <span class="f">1-2 = 1-H ± 30</span>（内外侧决定正负）</td></tr>
+      <tr><td>"∠H12=30°，∠H14=120°"</td><td>给角度关系</td><td>两条射线交会，先算 1-H，再反求 1-2</td></tr>
+      <tr><td>"2-3 与 H-1 航向相同 / 相反（相向）"</td><td>给角度关系</td><td>相同 <span class="f">2-3 = H-1</span>；相反 <span class="f">±180</span></td></tr>
+      <tr><td>"西北风，2-3 逆风 / 5 到 4 正右侧风"</td><td>给角度关系</td><td>用风向四式把风翻成边的方位角（见下）</td></tr>
+      <tr><td>"航向为 1 点 48 分（时针）"</td><td>给角度关系</td><td><span class="f">30×1 + 0.5×48 = 54</span></td></tr>
+      <tr><td>"H 到 5、6 距离相等且等于边长"</td><td>图形理解</td><td>H 是正六边形中心 → 1-H = 内角平分线，距离 = 边长</td></tr>
+      <tr><td>"A、B 两点经纬度"</td><td>坐标</td><td>画出 A、B，读 <b>A-B 的方位角</b>，就不用旋转了</td></tr>
+      <tr><td>图上带 X / Y 坐标轴</td><td>坐标</td><td>把轴方向换算成北向，读出某边方位角</td></tr>
+    </tbody>
+  </table></div>
+
+  <h4>风向：一条口诀，四种情况</h4>
+  <div class="f b big">风向 F 是<b>风的来向</b>。顺风 = F+180　｜　逆风 = F　｜　左侧风 = F+90　｜　右侧风 = F−90</div>
   <div class="tw"><table class="small tight">
     <thead><tr><th>本场风向 F</th><th class="c">顺风</th><th class="c">逆风</th><th class="c">左侧风</th><th class="c">右侧风</th></tr></thead>
     <tbody>
-      <tr><td>西北风（F=315°）</td><td class="c num">135°</td><td class="c num">315°</td><td class="c num">45°</td><td class="c num">225°</td></tr>
-      <tr><td>西南风（F=225°）</td><td class="c num">45°</td><td class="c num">225°</td><td class="c num">315°</td><td class="c num">135°</td></tr>
-      <tr><td>东南风（F=135°）</td><td class="c num">315°</td><td class="c num">135°</td><td class="c num">225°</td><td class="c num">45°</td></tr>
-      <tr><td>东北风（F=45°）</td><td class="c num">225°</td><td class="c num">45°</td><td class="c num">135°</td><td class="c num">315°</td></tr>
+      <tr><td>西北风（F=315）</td><td class="c num">135</td><td class="c num">315</td><td class="c num">45</td><td class="c num">225</td></tr>
+      <tr><td>西南风（F=225）</td><td class="c num">45</td><td class="c num">225</td><td class="c num">315</td><td class="c num">135</td></tr>
+      <tr><td>东南风（F=135）</td><td class="c num">315</td><td class="c num">135</td><td class="c num">225</td><td class="c num">45</td></tr>
+      <tr><td>东北风（F=45）</td><td class="c num">225</td><td class="c num">45</td><td class="c num">135</td><td class="c num">315</td></tr>
     </tbody>
   </table></div>
-  <div class="warn"><span class="lb">方向别搞反</span>“西北风”是<b>从西北吹过来</b>，不是“吹向西北”。风从 315° 来 → 顺风航向是 135°（往东南飞）。</div>
-</section>
+  <div class="why"><b>为什么顺风是 F+180：</b>"西北风"是从西北吹过来的风，它把飞机往东南推。所以飞机往东南飞才是顺风，而东南 = 315+180 = 135。左侧风/右侧风则是相对机头左右各 90°。<b>先想清楚"风往哪吹"，再套式子。</b></div>
 
-<!-- ============ 05 起飞点 ============ -->
-<section class="sec" id="home">
-  <h2><span class="n">05</span>题型 · 起飞点 H 条件</h2>
-  <p class="lead">两条铁律：<b>全部化成“N-H 方位角 + 距离”</b>；<b>凡是“起飞点到 X 点”，都要先取反方向</b>。</p>
-
-  <div class="tw">
-  <table>
-    <thead><tr><th style="width:30%">题面写法</th><th style="width:36%">换算成 N-H</th><th>备注</th></tr></thead>
-    <tbody>
-      <tr><td><b>① 起飞点到 X 点航向 SW，距离 80m</b></td>
-          <td>题给 <span class="f">H-X = 225°</span><br>要填 <span class="f">X-H = 45°</span></td>
-          <td class="c">反向 180°</td></tr>
-      <tr><td><b>② 起飞点位于 X 点西偏北 20°，距离 200m</b></td>
-          <td>题给 <span class="f">X-H = 290°</span>，直接填</td>
-          <td>“位于 X 点”= 从 X 看 H</td></tr>
-      <tr><td><b>③ ∠H12=30°，∠H14=120°，距 1 点 75m</b></td>
-          <td>以 1 号为基准：<span class="f">1-H = 1-2 ± 30°</span>，还要满足 <span class="f">1-H = 1-4 ± 120°</span>，两射线交会；距离 75m</td>
-          <td>两角同时满足才唯一</td></tr>
-      <tr><td><b>④ ∠H31=30°（起飞点在图形内侧）</b></td>
-          <td>先 <span class="f">1-3 = 3-1 + 180</span>，再 <span class="f">1-H = 1-3 ± 30°</span></td>
-          <td>内侧/外侧决定 + 还是 −</td></tr>
-      <tr><td><b>⑤ H-1 与 1-2 同向 / 反向</b></td>
-          <td>同向：<span class="f">H-1 = 1-2</span> → <span class="f">1-H = 1-2 ± 180</span><br>反向：<span class="f">H-1 = 1-2 ± 180</span> → <span class="f">1-H = 1-2</span></td>
-          <td>相向 = 相反</td></tr>
-      <tr><td><b>⑥ 起飞点到 1、2 两点距离相等</b></td>
-          <td>H 在 1-2 的<b>垂直平分线</b>上：中点为基准，沿 <span class="f">1-2 ± 90°</span> 方向，距离 <span class="f">√(D² − (L/2)²)</span></td>
-          <td>两个解，按内外侧选</td></tr>
-      <tr><td><b>⑦ 起飞点垂直于 1-2 边中点，距离 100m</b></td>
-          <td>中点 + <span class="f">1-2 ± 90°</span> + 100m（朝图形外侧）</td>
-          <td>先算中点</td></tr>
-      <tr><td><b>⑧ 起飞点在 1-2 延长线上，距 1 点 150m</b></td>
-          <td>方位角同 <span class="f">1-2</span>，距离 150m</td>
-          <td>注意是“延长”不是反向</td></tr>
-      <tr><td><b>⑨ 双坐标：另给 H 的经纬度</b></td>
-          <td>选中 H → 直接输入经纬度 → <b>回车生效</b></td>
-          <td><b>不要点下面的确认按钮</b>（会按上次条件改 H）</td></tr>
-      <tr><td><b>⑩ “起飞点与考试席位的相对方位由委任代表现场决定”</b></td>
-          <td>考官现场口述方位+距离，按口述输入</td>
-          <td>先随便放，最后按口述调</td></tr>
-    </tbody>
-  </table>
-  </div>
-
-  <div class="tip"><span class="lb">面板用法</span>选中 H 后，快捷调整框有三格：<b>起飞点位于图形的第 [N] 个航点</b> + <b>距离</b> + <b>角度</b>。这个“角度”就是 <b>N-H 的方位角</b>——所以上面所有换算，最终都填这三个格。</div>
-
-  <h3>一个完整核对示例</h3>
-  <div class="box">
-    <div class="d" style="font-size:13.5px;color:var(--ink2)">
-      题：等边三角形边长 80m，<b>起飞点到 2 点航向 NE、距离 80m</b>，3 到 1 的指向角 160°。<br>
-      1）画等边三角形（内角 60°，顺时针 +）→ 闭合。<br>
-      2）旋转条件：<span class="f">3-1 = 160°</span> → <span class="f">1-3 = 340°</span>，把 1-3 边转到 340°。<br>
-      3）H 条件：<span class="f">H-2 = 45°</span> → 要填 <span class="f">2-H = 225°</span>，距离 80m。<br>
-      4）平移题给经纬度 → 参数 → 测距抽检 <span class="f">2-H = 225° / 80m</span>。
-    </div>
-  </div>
-</section>
-<!-- ============ 06 特殊任务 ============ -->
-<section class="sec" id="special">
-  <h2><span class="n">06</span>题型 · 特殊任务</h2>
-  <p class="lead">这几种题在常规流程上“插一段”或“换一套条件”，其余步骤不变。</p>
-
-  <h3>6.1 避让点 / 空域限制（13%）</h3>
-  <p><b>题面长这样：</b>“由于空域限制：起飞后需先向 <b>NE 方向飞 600m</b> 到达'避让点'，再执行任务航线；避让点高度 320m；图形 <b>1 号点在避让点 NW 方向 500m</b> 处。”</p>
-  <ol class="steps flat">
-    <li><b>正常画图 + 旋转</b><span class="body">先按图形条件把航线画对、转正。</span></li>
-    <li><b>以 1 号点反推新 1 号点</b><span class="body">用编辑器以 1 号为基准插入 1 号点：方位角 = <b>起飞后最后一段飞行的反方向</b>，距离 = 该段长度 → 新点成为 1 号（避让点），原 1 号自动变 2 号。</span></li>
-    <li><b>两段飞行就做两次</b><span class="body">“先向 NE 飞 300 到障碍点，再向 NW 飞 500 到航点 1” → 先以 1 号为基准 SE 500 插点（障碍点）；再以障碍点为基准、按障碍点到 H 的关系摆 H（此处 <span class="f">1-H = 225°</span>，300m）。</span></li>
-    <li><b>单独设避让点高度</b><span class="body">避让点高度照样例单独改（例：320m）。</span></li>
-    <li><b>平移基准点换成 2 号点</b><span class="body">题卡上说的“图形 1 号点”已经是你的 2 号点。</span></li>
-  </ol>
-  <div class="tw"><table class="small tight">
-    <thead><tr><th style="width:34%">题卡里的叫法</th><th>对应你航线里的航点</th></tr></thead>
-    <tbody>
-      <tr><td>“避让点” / “过渡点” / “障碍点”（第一个点）</td><td><b>1 号点</b></td></tr>
-      <tr><td>“题卡图形 1 号点” / “图形的第 1 点”</td><td><b>2 号点</b>（序号全部 +1）</td></tr>
-      <tr><td>平移经纬度的基准点</td><td><b>2 号点</b></td></tr>
-    </tbody>
-  </table></div>
-
-  <h3>6.2 双坐标（H 坐标 + 航点坐标）</h3>
-  <p>题面不再给“H 与某点的方位角+距离”，而是直接给 <b>H 的经纬度</b> 和 <b>某个航点的经纬度</b>。</p>
-  <ol class="steps flat">
-    <li><b>画图 + 旋转</b><span class="body">常规操作。</span></li>
-    <li><b>用航点坐标平移</b><span class="body">平移工具，基准点选那个航点，填经纬度 → 平移。</span></li>
-    <li><b>直接输 H 坐标</b><span class="body">选中 H，在上方经纬度框填值 → <b>按回车</b>生效。</span></li>
-  </ol>
-  <div class="warn"><span class="lb">致命操作</span>输完 H 坐标<b>别点下面的确认按钮</b>——那会用上次输入的旧条件改 H，位置立刻错。</div>
-
-  <h3>6.3 双航点坐标（两个航点坐标，没有 H 位置条件）</h3>
-  <ol class="steps flat">
-    <li><b>任意点 H、任意点 1</b><span class="body">先有图面。</span></li>
-    <li><b>用 A 点坐标平移</b><span class="body">若 A、B 里有 1 号点就用 1 号点；这样 A 点落到真实位置。</span></li>
-    <li><b>用 B 点坐标插 B 点</b><span class="body">打开编辑器上方的<b>坐标开关</b>，填 B 的经纬度插入 → 图上出现 A-B 连线。</span></li>
-    <li><b>读 A-B 的方位角和距离</b><span class="body">这就是真实朝向和边长 → 关掉坐标开关 → 按这个方位角/距离把其余点画完。</span></li>
-    <li><b>不用旋转</b><span class="body">此时图形已经是正确朝向，直接摆 H、平移、参数。</span></li>
-  </ol>
-  <div class="warn"><span class="lb">致命操作</span>坐标开关不关就继续加点 → 所有点都按坐标插入，全部与 1 号点重合，图形毁掉。</div>
-
-  <h3>6.4 扫描航线（9%，新题必看）</h3>
-  <p><b>题面：</b>“（一）规划扫描航线，要求闭合不循环，航线长度为 a，航线间隔为 b，航线相对地面高度为 c，水平速度为 d，垂直速度为 e，转弯模式为协调转弯；（二）a=500m，b=100m，c=300m，d=3m/s，e=2m/s。”</p>
+  <h3>4.2 起飞点类：全部化成"N-H 方位角 + 距离"</h3>
   <div class="tw"><table class="small">
-    <thead><tr><th style="width:32%">题卡参数</th><th>填到哪</th></tr></thead>
+    <thead><tr><th style="width:34%">题面写法</th><th style="width:12%">类型</th><th>换算</th></tr></thead>
     <tbody>
-      <tr><td>航线长度 a</td><td>扫描/区域航线的<b>单条航线长度</b></td></tr>
-      <tr><td>航线间隔 b</td><td>相邻条带<b>间距</b>（条数 ≈ 总宽 ÷ b + 1）</td></tr>
-      <tr><td>相对地面高度 c</td><td>航线高度（选“相对地面”）</td></tr>
-      <tr><td>水平速度 d / 垂直速度 e</td><td>水平速度 / 垂直速度（<b>两个都要填</b>）</td></tr>
-      <tr><td>闭合 / 不闭合、循环次数</td><td>航线设置里的循环模式</td></tr>
-      <tr><td>转弯模式、停留时间 f</td><td>转弯模式 + 各点悬停时间（协调转弯时停留时间无效）</td></tr>
+      <tr><td>"起飞点到 X 点航向 SW，距离 80 米"</td><td>要反转</td><td>题给 <span class="f">H-X = 225</span>，填 <span class="f">X-H = 45</span>，80 米</td></tr>
+      <tr><td>"起飞点位于 X 点西偏北 20°，200 米"</td><td>直接用</td><td><span class="f">X-H = 290</span>，200 米</td></tr>
+      <tr><td>"∠H12 = 30°，距 1 点 75 米"</td><td>交会</td><td><span class="f">1-H = 1-2 ± 30</span>，75 米</td></tr>
+      <tr><td>"H 到 1、2 两点距离相等"</td><td>交会</td><td>H 在 1-2 中垂线上：中点 + <span class="f">1-2 ± 90</span>，距离 <span class="f">√(D² − (L/2)²)</span></td></tr>
+      <tr><td>"起飞点垂直于 1-2 边中点，距 100 米"</td><td>交会</td><td>中点 + <span class="f">1-2 ± 90</span>，朝图形外侧</td></tr>
+      <tr><td>"起飞点在 1-2 延长线上，距 1 点 150 米"</td><td>交会</td><td>方位同 <span class="f">1-2</span>，距离 150（不是反方向！）</td></tr>
+      <tr><td>"另给 H 经纬度"（双坐标）</td><td>坐标</td><td>选中 H 输经纬度 → <b>回车</b>（别点确认按钮）</td></tr>
+      <tr><td>"起飞点与考试席位方位由委任代表现场决定"</td><td>口述</td><td>按考官现场说的方位与距离填，先随便放</td></tr>
     </tbody>
   </table></div>
+  <div class="why"><b>为什么"到 X 点"必须反转：</b>软件那个框问的是"<b>从第 N 个航点看 H，在什么方向</b>"，也就是 N-H。题里写的是"从 H 看 X"，方向正好差 180°。这就是为什么同样的数字，有人填进去 H 跑到了图形另一侧。</div>
+
+  <h3>4.3 位置类：两种，外加一个坑</h3>
   <ul>
-    <li><b>“于起飞点前规划”</b>：指图形/扫描区在起飞点前方，按 H 条件摆好后自然满足，不产生额外操作。</li>
-    <li><b>“合理规划起降航线，要求逆风起降”</b>：起降航向朝<b>逆风</b>方向（即 F），不是顺风。</li>
-    <li>生成后自查：条带方向是否一致、条带数是否等于 总宽÷间隔+1、有没有缺条。</li>
+    <li><b>单点</b>：题给一个点的经纬度（多数是 H，也可能是某个航点）→ 平移工具，基准点选它。</li>
+    <li><b>双点</b>：H + 某航点（直接输 H 坐标），或两个航点（用坐标开关画出一条已知边，免旋转）。</li>
+    <li><b>坑</b>：题卡写"1 号点经纬度"，但你前面插了避让点，<b>1 号已经变成 2 号</b>——平移基准点要跟着改。</li>
   </ul>
 
-  <h3>6.5 其他变体</h3>
-  <div class="tw"><table class="small">
-    <thead><tr><th style="width:24%">变体</th><th>题面特征</th><th style="width:38%">处理</th></tr></thead>
-    <tbody>
-      <tr><td><b>圆形航线</b></td><td>“直径 a，航点数 ≥ 10，逆时针”</td><td>用圆形/环形航线工具；没有就用 12 边形近似 <span class="tag dr">※</span></td></tr>
-      <tr><td><b>分段高度</b></td><td>“123 航点高度 b，456 航点高度 c”</td><td>逐点改，别用整体高度一次改完</td></tr>
-      <tr><td><b>执行次数</b></td><td>“航线执行次数为 g”“航线执行 5 次”</td><td>填循环次数（不是“无限循环”）</td></tr>
-      <tr><td><b>高度含起飞点</b></td><td>“各点高度一致，包括起飞点”</td><td>H 的高度也要改成航高</td></tr>
-      <tr><td><b>距离约束</b></td><td>“各点之间距离不小于 50m”</td><td>画完自查每段长度；不满足要放大边长</td></tr>
-      <tr><td><b>完成动作</b></td><td>“任务完成后返航”“完成后原地悬停 1 点位置”</td><td>航线设置 → 完成动作</td></tr>
-    </tbody>
-  </table></div>
-</section>
-
-<!-- ============ 07 参数录入 ============ -->
-<section class="sec" id="params">
-  <h2><span class="n">07</span>参数录入（字母题解码）</h2>
-  <p class="lead">一半以上的新题把数值换成了 a / b / c / d / e / f / g。<b>字母每张卡都不一样，不要背位置，要现场配对。</b></p>
-
-  <h3>7.1 三步解码</h3>
-  <ol class="steps">
-    <li><b>抄(一)，配对</b><span class="body">在纸上把每个字母和它前面的名词连起来：“边长为 <b>a</b>”“相对地面高度为 <b>b</b>”“水平速度为 <b>c</b>”“垂直速度为 <b>d</b>”“停留时间为 <b>e</b>”“执行次数为 <b>g</b>”。</span></li>
-    <li><b>抄(二)，填值</b><span class="body">(二)里写“a 值建议为 300 米、b 值建议为 80 米…”，<b>“建议”也是要填的值</b>。</span></li>
-    <li><b>对表输入</b><span class="body">按下面的映射逐个填软件字段，填完回头再看一眼单位。</span></li>
+  <h3>4.4 参数类：三步解码</h3>
+  <p>很多新题把数字换成字母 a / b / c…，<b>字母每张卡都不一样</b>。</p>
+  <ol class="small">
+    <li>在(一)里把每个字母和它修饰的名词连起来："边长为 a""高度为 b""水平速度为 c"。</li>
+    <li>到(二)里取值，<b>"建议为"也是要填的值</b>。</li>
+    <li>按"整条 / 分段 / 单点"三类归位，注意单位（km/h ÷ 3.6 = m/s）。</li>
   </ol>
+  <details><summary>试一下：这句话说了哪几件？"规划一个手动闭合正六边形并循环执行，边长为 a，123 点相对地面高度为 b，水平速度为 c，转弯方式为停止转弯，各点停留时间为 d"</summary>
+  <div class="a">形状 = 正六边形（6 条边、内角 120°、顺时针）+ 边长 a；参数 = 分段高度（1-3 点 b）、水平速度 c、转弯模式（停止）、停留 d、循环（执行 1 次）。<b>没有提朝向</b>——所以这道题一定另有朝向条件，或者题图本身给了。</div></details>
+</section>
+<!-- ============ 05 例题 ============ -->
+<section class="sec" id="ex">
+  <h2><span class="n">05</span>例题精讲：六道题，把方法焊死</h2>
+  <p class="lead">每题都按同一个动作套路走：<b>先归位（四件事）→ 再算角 → 再画 → 再摆 → 再平移 → 再填参数 → 最后自检</b>。看懂前两题，后面就是换参数。</p>
 
-  <div class="tw"><table class="small">
-    <thead><tr><th style="width:34%">题卡里的修饰语</th><th>填到哪里</th></tr></thead>
-    <tbody>
-      <tr><td>边长 / 距离 / 航线长度 / 直径</td><td>画图时的距离（相对坐标编辑器）</td></tr>
-      <tr><td>相对地面高度 / 航线高度 / 所有航点高度</td><td>每个航点的<b>高度</b>（选“相对地面”）</td></tr>
-      <tr><td>水平速度</td><td><b>水平速度</b></td></tr>
-      <tr><td>垂直速度 / 垂直爬升速度</td><td><b>垂直速度</b></td></tr>
-      <tr><td>停留时间 / 悬停时间</td><td><b>悬停时间</b></td></tr>
-      <tr><td>转弯模式 / 转弯方式</td><td><b>转弯模式</b></td></tr>
-      <tr><td>循环模式 / 执行次数</td><td><b>循环</b>设置</td></tr>
-      <tr><td>完成任务后…</td><td><b>完成动作</b></td></tr>
-    </tbody>
-  </table></div>
+  <!-- 例1 -->
+  <div class="ex">
+    <div class="t"><span class="no">例 1</span>等边三角形：最标准的全流程</div>
+    <div class="q">
+      图形：等边三角形，边长 <b>80 m</b>。题图 1→2→3 为<b>逆时针</b>（<b>题图只告诉你形状和顺逆，真实朝向由下面的角度决定</b>）。<br>
+      朝向：<b>3 到 1 的指向角度为 160°</b>。<br>
+      起飞点：<b>起飞点到 2 点航向 NE，距离 80 m</b>。<br>
+      参数：航高 90 m、水平 3 m/s、垂直 2 m/s；停止转弯，<b>1 点停 3 s、其余 5 s</b>；<b>闭合循环 3 圈</b>。<br>
+      位置：H 经纬度 <b>N31.26°、E95°20′24″</b>。
+    </div>
 
-  <h3>7.2 转弯模式与循环</h3>
-  <div class="grid g2">
-    <div class="box"><div class="k">停止转弯 = 定点转弯 = 悬停</div><div class="d">三个说法是<b>同一个概念</b>：到点停住，按“悬停时间”停留，再转下一个点。出现率 91%。</div></div>
-    <div class="box"><div class="k">协调转弯</div><div class="d">不停留直接转过去，<b>停留时间无效</b>；填了悬停时间也不算错，但别指望它停留。</div></div>
+    <h5>第 1 步：归位——这句话在说哪件事</h5>
+    <div class="tw"><table class="small tight">
+      <tr><th style="width:16%">形状</th><td>等边三角形 80 m → 内角 60°，<b>转折角 120°</b></td></tr>
+      <tr><th>朝向</th><td>3-1 = 160°，要转成 <b>1-3 = 340°</b></td></tr>
+      <tr><th>H</th><td>"起飞点<b>到</b> 2 点 NE" → H-2 = 45° → 要填 <b>2-H = 225°，80 m</b></td></tr>
+      <tr><th>位置</th><td>H 的经纬度，<b>平移基准点就是 H</b></td></tr>
+    </table></div>
+
+    <h5>第 2 步：算三条边（转折公式，逆时针用减）</h5>
+    <ol>
+      <li>题给 <span class="f">3-1 = 160°</span>。</li>
+      <li>下一个航段是 1-2：<span class="f">1-2 = 160 − (180−60) = 160 − 120 = 40°</span>。</li>
+      <li>再下一段 2-3：<span class="f">40 − 120 = −80 → 280°</span>。</li>
+      <li>再下一段 3-1：<span class="f">280 − 120 = 160°</span> —— <b>又回到题给的值，说明三条边算对了（这就是自检）</b>。</li>
+    </ol>
+
+    <h5>第 3 步：在软件里做</h5>
+    <ol>
+      <li><b>画</b>：任意点 1 号点 → 相对坐标编辑器 <b>40°、80 m</b> → 生成 2 号点 → 切<b>夹角</b>模式，内角 <b>60</b>、距离 80、<b>负号</b>（逆时针）→ 连点两次生成，第 4 个点落回 1 号点，闭合。</li>
+      <li><b>转</b>：旋转工具让 <span class="f">3-1 = 160°</span>（若工具按 1-2 输入，就填 40°）。</li>
+      <li><b>摆 H</b>：起飞点位于第 <b>2</b> 个航点，距离 <b>80</b>，角度 <b>225</b>。</li>
+      <li><b>移</b>：平移工具基准点 = H，纬度 31.26、经度 <b>95.34</b>（95°20′24″ = 95 + 20/60 + 24/3600 = 95.34）。</li>
+      <li><b>参数</b>：全部航点高度 90、水平 3、垂直 2；1 点悬停 3 s、其余 5 s；<b>循环 3 圈</b>。</li>
+    </ol>
+
+    <div class="res"><b>答案：</b>1-2 = 40°、2-3 = 280°、3-1 = 160°；起飞点在第 2 个航点 225°、80 m 处；航高 90、水平 3、垂直 2、1 点 3 s 其余 5 s、循环 3 圈。</div>
+
+    <h5>这题会怎么变形</h5>
+    <ul>
+      <li>改成顺时针 → 三条边变成 <b>+120</b>：1-2 = 100、2-3 = 220、3-1 = 340。</li>
+      <li>改成"2 点在 3 点 SW 方向" → 先写 3-2，再取反得 2-3。</li>
+      <li>H 改成"起飞点位于 2 点 SW 80 m" → 这时<b>不用反转</b>，直接填 2-H = 225。</li>
+      <li>H 改成"到 2 点距离 80 m，在图形外侧" → 光有距离是圆，必须再看图定方向。</li>
+    </ul>
   </div>
-  <div class="tw"><table class="small tight">
-    <thead><tr><th style="width:30%">循环写法</th><th>软件设置</th><th style="width:34%">完成动作</th></tr></thead>
-    <tbody>
-      <tr><td>闭合循环 3 圈 / 执行 5 次</td><td>闭合 + 循环圈数</td><td>循环结束后返航或悬停（题给）</td></tr>
-      <tr><td>闭合不循环 / 任务完成后返航降落</td><td>闭合 + 不循环</td><td>返航降落</td></tr>
-      <tr><td>不循环 + 原地悬停 1 点位置</td><td>不循环</td><td>悬停（在 1 点）</td></tr>
-      <tr><td>无限循环</td><td>无限循环</td><td><b>没有</b>完成动作这一项</td></tr>
-    </tbody>
-  </table></div>
-  <div class="key"><span class="lb">规律</span><b>非无限循环才有“完成动作”</b>。题里写了“任务完成后返航/悬停”，说明一定不是无限循环。</div>
 
-  <h3>7.3 全局 vs 局部（最容易漏）</h3>
-  <div class="tw"><table class="small">
-    <thead><tr><th style="width:34%">题面</th><th>改哪里</th></tr></thead>
-    <tbody>
-      <tr><td>“整体航线高度 / 航线高度为 90m”</td><td>航线设置（全局高度）</td></tr>
-      <tr><td>“123 航点高度 b、456 航点高度 c”</td><td>逐点改（局部）</td></tr>
-      <tr><td>“起飞点高度为航线高度”（19% 的卡都有）</td><td>H 的高度也改成航高</td></tr>
-      <tr><td>“水平速度 3m/s、垂直速度 2m/s”</td><td><b>两个都要改</b>——只改水平是最常见的漏项</td></tr>
-      <tr><td>“4 点为停止转弯，其余为协调转弯”</td><td>逐点设转弯模式（局部）</td></tr>
-    </tbody>
-  </table></div>
+  <!-- 例2 -->
+  <div class="ex">
+    <div class="t"><span class="no">例 2</span>正六边形 + 起飞点在中心（图形理解）</div>
+    <div class="q">
+      图形：正六边形，边长 <b>300 m</b>，1→2→…→6 <b>顺时针</b>。<br>
+      朝向：<b>1 到 2 的航向为北偏东 30°</b>。<br>
+      起飞点：<b>H 到 1 点、2 点的距离都是 300 m，且 H 在图形内侧</b>。<br>
+      参数：<b>1、2、3 点高度 80 m；4、5、6 点高度 50 m</b>；水平 3 m/s、垂直 2 m/s；停止转弯，各点 5 s；闭合不循环，完成后悬停 1 点位置。<br>
+      位置：本题<b>不给经纬度</b>。
+    </div>
 
-  <h3>7.4 单位换算</h3>
-  <p><span class="f">m/s = km/h ÷ 3.6</span>　→　36 km/h = 10 m/s　·　14.4 km/h = 4 m/s　·　18 km/h = 5 m/s　·　7.2 km/h = 2 m/s</p>
-  <p><small>题里若写“14.4km/h”，软件填 4；写“90 米”，软件填 90。填完抬头看一眼单位框别选错。</small></p>
+    <h5>归位</h5>
+    <p>形状 = 六边形（内角 120、转折 60）；朝向 = 1-2 = 30°；H = 图形理解；位置 = 无（<b>不用平移</b>）。</p>
+
+    <h5>算 + 做</h5>
+    <ol>
+      <li>顺时针每段 +60：<span class="f">30 → 90 → 150 → 210 → 270 → 330 → 30</span>，最后回到起点，闭合 ✓</li>
+      <li>画图：1-2 = 30°、300 m；夹角模式内角 <b>120</b>、<b>正号</b>（顺时针）、距离 300 → 连点 5 次生成 6 个点后回到 1 号点。</li>
+      <li>摆 H：六边形"中心到顶点距离 = 边长"，所以 H 只能是<b>中心</b>（外侧那个点不符合"内侧"）。<br>
+        中心方向 = 内角平分线：<span class="f">1-H = 1-2 + 60 = 90°</span>，距离 <b>300 m</b>。<br>
+        <small>核对：1-2 = 30、1-6 = 150，两者中间正好 90°，与"中心"吻合。</small></li>
+      <li>参数：1、2、3 号点填 80；4、5、6 号点填 50；水平 3、垂直 2；停止转弯、各点 5 s；不循环；完成动作 = 悬停 1 点位置。</li>
+    </ol>
+    <div class="res"><b>答案：</b>六条边 30 / 90 / 150 / 210 / 270 / 330；起飞点在第 1 个航点 <b>90°、300 m</b> 处；分段高度 80 / 50。</div>
+
+    <h5>这题会怎么变形</h5>
+    <ul>
+      <li>"H 在图形<b>外侧</b>" → 方向改成 <span class="f">1-2 − 60 = 330°</span>，距离仍是 300。</li>
+      <li>"H 到 1、2 距离均为 400 m（大于边长）" → H 在 1-2 的中垂线上，用中垂线法算距离。</li>
+      <li>"H 到 1、2、3 三点距离相等" → 还是中心（三点定圆）。</li>
+      <li>给你一个经纬度 → 第 5 步加一次平移。</li>
+    </ul>
+  </div>
+
+  <!-- 例3 -->
+  <div class="ex">
+    <div class="t"><span class="no">例 3</span>直角梯形 + 双夹角定 H</div>
+    <div class="q">
+      图形：直角梯形 1-2-3-4（1 左下、2 右下、3 右上、4 左上，<b>逆时针</b>）；<b>1-2 = 200 m、1-4 = 75 m、∠1 = ∠4 = 90°、∠2 = 135°</b>。<br>
+      朝向：<b>3 到 4 的航向为西（270°）</b>。<br>
+      起飞点：<b>∠H12 = 30°、∠H14 = 120°，起飞点距离 1 点 75 m</b>。<br>
+      参数：航高 70 m、水平 4 m/s、垂直 2 m/s；停止转弯，各点 5 s；闭合不循环；<b>起飞点高度为航线高度</b>。
+    </div>
+
+    <h5>归位 + 算</h5>
+    <ol>
+      <li>朝向：<span class="f">3-4 = 270°</span>。1-2 与 3-4 是两条平行底边、方向相反 → <span class="f">1-2 = 90°</span>。</li>
+      <li>∠2 = 135° → 转折角 45°，逆时针用减 → <span class="f">2-3 = 90 − 45 = 45°</span>。</li>
+      <li>45° 斜边意味着"水平位移 = 竖直落差"。竖直落差就是左侧边 <span class="f">1-4 = 75 m</span> → <span class="f">2-3 = 75 × 1.414 ≈ 106.1 m</span>，顶边 <span class="f">3-4 = 200 + 75 = 275 m</span>。</li>
+      <li>∠4 = 90° → 转折 90° → <span class="f">4-1 = 270 − 90 = 180°</span>；再验 <span class="f">1-2 = 180 − 90 = 90°</span> ✓ 闭合。</li>
+      <li>画图：1-2 = 90°、200 m；夹角 <b>135</b>（逆时针 −）、距离 106.1 → 生成 3；夹角 90（−）、距离 275 → 生成 4 → 回到 1 闭合。</li>
+      <li>旋转：让 1-2 = 90°（题给 3-4 = 270，等价）。</li>
+      <li>H：两个条件同时满足才唯一。<br>
+        ∠H12 = 30 → <span class="f">1-H = 90 ± 30 = 60 或 120</span>；<br>
+        ∠H14 = 120 → <span class="f">1-H = 0 ± 120 = 120 或 240</span>；<br>
+        <b>公共解 = 120°</b>。填：起飞点在第 1 个航点，角度 <b>120</b>，距离 <b>75</b>。</li>
+      <li>参数：全部 70 m；<b>H 高度也改 70</b>；水平 4、垂直 2；各点 5 s；不循环。</li>
+    </ol>
+    <div class="res"><b>答案：</b>1-2 = 90°、2-3 = 45°（106.1 m）、3-4 = 270°（275 m）、4-1 = 180°（75 m）；起飞点在第 1 个航点 120°、75 m 处。</div>
+
+    <div class="why"><b>为什么双夹角一定要"找公共解"：</b>一个夹角条件只给你两条射线（±），两个条件才有交点。考试里如果只用一个，H 会落在镜像位置——考官一眼就能看出来。</div>
+
+    <h5>这题会怎么变形</h5>
+    <ul>
+      <li>∠2 改成 120° → 转折 60°，2-3 变成"斜得更平"，边长用 75 ÷ sin60。</li>
+      <li>平行关系改成"4 点在 3 点正西" → 等价，还是 3-4 = 270。</li>
+      <li>H 条件换成"∠H21 = 45°、距 2 点 100 m" → 先算 2-1，再 ±45。</li>
+    </ul>
+  </div>
+
+  <!-- 例4 -->
+  <div class="ex">
+    <div class="t"><span class="no">例 4</span>等腰直角三角形 + 风向</div>
+    <div class="q">
+      图形：等腰直角三角形 1-2-3，<b>∠2 = 90°、1-2 = 2-3 = 200 m</b>，1→2→3 <b>顺时针</b>。<br>
+      朝向：<b>本场西北风，2-3 为逆风</b>。<br>
+      起飞点：<b>起飞点位于 3 点 SW 方向 100 m</b>。<br>
+      参数：航高 66 m、水平 2 m/s、垂直 6 m/s；定点转弯，各点 6 s；闭合不循环，完成后悬停 1 点位置。
+    </div>
+
+    <h5>归位 + 算</h5>
+    <ol>
+      <li>风向：西北风 <span class="f">F = 315°</span>；<b>逆风 = F</b> → <span class="f">2-3 = 315°</span>。</li>
+      <li>顺时针走，每过一个顶点把方位角加上转折角：<br>
+        顶点 2 内角 90 → 转折 90：<span class="f">1-2 = 315 − 90 = 225°</span>；<br>
+        顶点 3 内角 45 → 转折 135：<span class="f">3-1 = 315 + 135 = 450 → 90°</span>；<br>
+        顶点 1 内角 45 → 转折 135：<span class="f">1-2 = 90 + 135 = 225°</span> ✓ 闭合。</li>
+      <li>斜边：<span class="f">3-1 = 200 × 1.414 ≈ 282.8 m</span>。</li>
+      <li>画图：1-2 = 225°、200 m；夹角模式内角 90、<b>正号</b>（顺时针）、距离 200 → 生成 3；内角 45、正号、距离 282.8 → 回到 1 闭合。</li>
+      <li>H："起飞点<b>位于</b> 3 点 SW" → 已经是 <b>3-H</b>，<b>不要反转</b>。填：起飞点在第 3 个航点，角度 <b>225</b>，距离 <b>100</b>。</li>
+      <li>参数：66 / 2 / 6；定点转弯、各点 6 s；不循环；完成动作 = 悬停 1 点位置。</li>
+    </ol>
+    <div class="res"><b>答案：</b>1-2 = 225°、2-3 = 315°、3-1 = 90°（282.8 m）；起飞点在第 3 个航点 225°、100 m 处。</div>
+
+    <h5>这题会怎么变形</h5>
+    <ul>
+      <li>"2-3 顺风" → 2-3 = 135（西北风的顺风方向是东南）。</li>
+      <li>"1-2 为正左侧风" → 1-2 = F + 90 = 45。</li>
+      <li>"3 点位于起飞点 SW" → 这时是 3-H 的<b>反方向</b>，要填 H-3 = 45。</li>
+    </ul>
+  </div>
+
+  <!-- 例5 -->
+  <div class="ex">
+    <div class="t"><span class="no">例 5</span>避让点：在 1 号点前面插一个点</div>
+    <div class="q">
+      图形：正六边形，边长 300 m，1-2 = 30°（顺时针）。<br>
+      空域限制：<b>起飞后先向 NE 飞 600 m 到达"避让点"，再执行航线</b>；避让点高度 <b>320 m</b>。<br>
+      <b>图形 1 号点在"避让点" NW 方向 500 m 处。</b><br>
+      参数：1、2、3 点高度 80 m；4、5、6 点高度 50 m；水平 3、垂直 2；停止转弯、各点 5 s；闭合不循环。
+    </div>
+
+    <h5>归位：这道题多了一件事</h5>
+    <p>它的 ①形状②朝向 和例 2 一模一样，只是 ③H 的位置变成了"<b>先经过一个避让点，再到图形</b>"。翻译过来就一句：<b>避让点是你的新 1 号点，图形整体往后挪一位。</b></p>
+
+    <h5>算 + 做</h5>
+    <ol>
+      <li><b>正常画图</b>：六条边 30 / 90 / 150 / 210 / 270 / 330（同例 2），并旋转好。</li>
+      <li><b>反推避让点</b>：题说"图形 1 号点在避让点的 NW"，反过来就是"<b>避让点在图 1 号点的 SE</b>" = <span class="f">135°</span>、<span class="f">500 m</span>。<br>
+        操作：相对坐标编辑器，基准点 = 1 号点，插入点 = 1 号点，方位 <b>135</b>、距离 <b>500</b> → 生成。新点成为 <b>1 号（避让点）</b>，原 1 号变 2 号，后面全部 +1。</li>
+      <li><b>避让点高度</b>：单独改成 <b>320 m</b>。</li>
+      <li><b>摆 H</b>：起飞后<b>向 NE</b> 600 m 到避让点 → 从避让点看 H 是 <b>SW</b> → 填：起飞点在第 <b>1</b> 个航点，角度 <b>225</b>，距离 <b>600</b>。</li>
+      <li><b>参数对应新序号</b>：题卡说"1、2、3 点 80 m" → 你现在是 <b>2、3、4 号点</b>；"4、5、6 点 50 m" → 你现在是 <b>5、6、7 号点</b>。</li>
+      <li><b>平移</b>：如果题给了坐标，且写的是"图形 1 号点"，基准点要选 <b>2 号点</b>。</li>
+    </ol>
+    <div class="res"><b>答案：</b>避让点 = 第 1 个航点（图 1 号点的 135°、500 m 处）；六条边 30…330；起飞点 = 第 1 个航点 225°、600 m；避让点高度 320；图 1-3 点高度 80 → 实际 2-4 点。</div>
+
+    <h5>这题会怎么变形</h5>
+    <ul>
+      <li>两段飞行（"先向 NE 300 m 到障碍点，再向 NW 500 m 到航点 1"）→ <b>反推两次</b>：先以 1 号为基准 SE 500 得障碍点，再以障碍点为基准摆 H。</li>
+      <li>题里叫"过渡点""障碍点"→ 和避让点是同一个位置，处理方式一样。</li>
+      <li>避让点高度写成"h 值为 320 m" → 一样填 320。</li>
+    </ul>
+  </div>
+
+  <!-- 例6 -->
+  <div class="ex">
+    <div class="t"><span class="no">例 6</span>字母题（参数化）与扫描航线</div>
+    <div class="q">
+      <b>6a 六边形参数版：</b>（一）规划一个手动闭合正六边形并循环执行，边长为 <b>a</b>，123 点相对地面高度为 <b>b</b>，456 点相对地面高度为 <b>c</b>，水平速度为 <b>d</b>，垂直速度为 <b>e</b>，转弯方式为停止转弯，各点停留时间为 <b>f</b>。<br>
+      （二）a 值建议为 300 米，b 值建议为 80 米，c 值建议为 50 米，d 值建议为 3 m/s，e 值建议为 2 m/s，f 值为 5 s。
+    </div>
+
+    <h5>解码：一条一条对</h5>
+    <div class="tw"><table class="small tight">
+      <thead><tr><th style="width:34%">(一) 里的说法</th><th class="c" style="width:14%">字母</th><th class="c" style="width:14%">(二) 的值</th><th>填到哪</th></tr></thead>
+      <tbody>
+        <tr><td>边长为</td><td class="c">a</td><td class="c num">300</td><td>画图距离（每条边 300 m）</td></tr>
+        <tr><td>123 点相对地面高度</td><td class="c">b</td><td class="c num">80</td><td>1、2、3 号点高度（<b>选相对地面</b>）</td></tr>
+        <tr><td>456 点相对地面高度</td><td class="c">c</td><td class="c num">50</td><td>4、5、6 号点高度</td></tr>
+        <tr><td>水平速度</td><td class="c">d</td><td class="c num">3</td><td>水平速度</td></tr>
+        <tr><td>垂直速度</td><td class="c">e</td><td class="c num">2</td><td>垂直速度（<b>别只填水平</b>）</td></tr>
+        <tr><td>各点停留时间</td><td class="c">f</td><td class="c num">5</td><td>悬停时间</td></tr>
+        <tr><td>转弯方式：停止转弯</td><td class="c">—</td><td class="c">—</td><td>转弯模式（= 定点转弯 = 悬停）</td></tr>
+        <tr><td>循环执行</td><td class="c">—</td><td class="c">—</td><td>循环 1 次（不写次数＝执行一次）</td></tr>
+      </tbody>
+    </table></div>
+    <div class="key"><span class="lb">注意</span>这类题<b>只给了形状和参数，没给朝向</b>。所以一定有别的条件（题图、H 条件、或另一条"点到点"）在决定旋转；如果通读全题都没有，就按题图摆放。<b>先找朝向，再动手画。</b></div>
+
+    <div class="q" style="margin-top:16px">
+      <b>6b 扫描航线：</b>（一）规划扫描航线要求闭合不循环，航线长度为 <b>a</b>，航线间隔为 <b>b</b>，航线相对地面高度为 <b>c</b>，水平速度为 <b>d</b>，垂直速度为 <b>e</b>，转弯模式为协调转弯。<br>
+      （二）a 值 500 米，b 值 100 米，c 值 300 m，d 值 3 m/s，e 值 2 m/s。
+    </div>
+    <h5>做</h5>
+    <ol>
+      <li>打开<b>扫描航线</b>工具，逐项填：长度 <b>500</b>、间隔 <b>100</b>、相对地面高度 <b>300</b>、水平 <b>3</b>、垂直 <b>2</b>。</li>
+      <li>转弯模式选<b>协调转弯</b>（不停留，停留时间这一项就不起作用了）；闭合、不循环。</li>
+      <li>生成后检查：条带方向一致、条带数量与间隔对得上、没有缺条。</li>
+      <li>如果同时要求"<b>逆风起降</b>"，起降航向要朝<b>风的来向</b>（F），不是顺风方向。</li>
+    </ol>
+    <div class="res"><b>要点：</b>字母题的难点不是算，是<b>别对错行</b>。养成习惯：拿笔在题卡上把字母圈出来，旁边写软件里的字段名，再抄数值。</div>
+  </div>
 </section>
 
-<!-- ============ 08 重规划 ============ -->
+<!-- ============ 06 题型全景 ============ -->
+<section class="sec" id="types">
+  <h2><span class="n">06</span>题型全景：八种组合，其实只有一件事在变</h2>
+  <p class="lead">几乎每张卡都是下面八种的<b>叠加</b>（比如"正六边形 + 避让点 + 风向 + 字母题"）。练的时候按组合练，考试时按拆解做。</p>
+
+  <div class="tw"><table>
+    <thead><tr><th style="width:20%">组合</th><th style="width:30%">题面特征</th><th style="width:22%">它在换哪件事的说法</th><th>解法主线</th></tr></thead>
+    <tbody>
+      <tr><td><b>① 正多边形</b></td><td>等边三角形 / 正方形 / 正五 / 正六边形，给边长或"总边长"</td><td>形状</td><td>内角 → 转折角 → 一条边推全部（顺时针加、逆时针减）</td></tr>
+      <tr><td><b>② 梯形 / 四边形</b></td><td>直角梯形、任意四边形，给边长 + ∠1∠2∠3</td><td>形状</td><td>找平行边定一条边；135°→45°、120°→60°；勾股补边长</td></tr>
+      <tr><td><b>③ 图形理解</b></td><td>H 到两点等距、H 在中心、垂直于某边中点、平分某个角</td><td>朝向 或 H</td><td>先把几何结论翻成一个角度或一条边，再当普通条件用</td></tr>
+      <tr><td><b>④ 夹角 / 双夹角</b></td><td>∠H12 = 30°、∠1 = ∠2 = 90°、∠H14 = 120°</td><td>朝向 或 H</td><td>待求 = 已知 ± 夹角；两个条件取公共解</td></tr>
+      <tr><td><b>⑤ 风向</b></td><td>"西北风，2-3 逆风""5 到 4 正右侧风""3 位于 2 点正下风"</td><td>朝向</td><td>F 是来向：顺 F+180 / 逆 F / 左 F+90 / 右 F−90</td></tr>
+      <tr><td><b>⑥ 时钟</b></td><td>"航向为 1 点 48 分（时针）""2 点 30 分的夹角"</td><td>朝向</td><td>时针 30H+0.5M，分针 6M；时刻 → 方位角</td></tr>
+      <tr><td><b>⑦ 避让点 / 空域</b></td><td>"起飞后先向 NE 飞 600 m 到避让点，再执行航线"</td><td>H（外加序号后移）</td><td>反方向插入新 1 号点；参数、坐标基准点全部 +1</td></tr>
+      <tr><td><b>⑧ 坐标 / 扫描 / 字母题</b></td><td>给两点经纬度；或"规划扫描航线，长度 a、间隔 b…"</td><td>位置 或 参数</td><td>双坐标：画线读方位，免旋转；扫描：按 a~f 逐项填；字母题：逐个对表</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="why"><b>怎么用它练"举一反三"：</b>每做完一道，问自己三句——① 这题的"形状"是怎么给的？② "朝向"是用哪种方式给的？③ H 是"直接方位""夹角交会"还是"坐标"？把三句答案写下来，你会发现不同题之间的差别，只有"换了一种说法"这一层。</div>
+</section>
+<!-- ============ 07 重规划 ============ -->
 <section class="sec" id="replan">
-  <h2><span class="n">08</span>重规划（口述指令 → 改 → 报）</h2>
-  <p class="lead">只有三类指令：<b>变点、变高、变速</b>。记住一句口诀：<b>速前高后</b>。</p>
+  <h2><span class="n">07</span>重规划：只有三类指令，记住"速前高后"</h2>
+  <p class="lead">这一关考的不是数学，是<b>听懂、改对、报准</b>。</p>
 
-  <div class="f b big">速度看“前”（起点航点）　｜　高度看“后”（终点航点）　｜　改整段 → 两端都改</div>
-  <div class="grid g2">
-    <div class="box"><div class="k">变高：改终点</div><div class="v">“2 到 3 高度升高 5m”</div><div class="d">→ 把 <b>3 号点</b>高度 +5（飞向 3 时的高度）</div></div>
-    <div class="box"><div class="k">变速：改起点</div><div class="v">“2 到 3 速度提升 1m/s”</div><div class="d">→ 把 <b>2 号点</b>速度 +1（从 2 出发的速度）</div></div>
-  </div>
+  <div class="f b big">速度看"前"（起点航点）　｜　高度看"后"（终点航点）　｜　改整段 → 两端都改</div>
+  <div class="why"><b>为什么：</b>每个航点的参数描述的是"<b>从它出发时的速度</b>"和"<b>到达它时的高度</b>"。所以"2 到 3 速度提 1"是改 2 号点的速度；"2 到 3 高度升 5"是改 3 号点的高度。想通这一点，一整张表都不用背。</div>
 
-  <h3>8.1 变点</h3>
+  <h3>7.1 变点</h3>
   <div class="tw"><table class="small">
-    <thead><tr><th style="width:44%">考官指令</th><th>操作</th></tr></thead>
+    <thead><tr><th style="width:46%">考官指令</th><th>操作</th></tr></thead>
     <tbody>
-      <tr><td>在 2 号点 45° 方向 10m 处加一个航点</td><td>选 2 号 → 编辑器 45° / 10m → 生成 → 改新点参数</td></tr>
-      <tr><td>在 2 号与 3 号点中间加一个点</td><td>选 2 号 → 右键<b>向后添加</b> → 改新点参数</td></tr>
-      <tr><td>在 2、3 之间加一点，距 2 号 5m</td><td>选 2 号 → 编辑器：2→3 的方位角 / 5m → 插入</td></tr>
-      <tr><td>在任意点东方向 10m 处加一个点，<b>保持图形不变</b></td><td>在原 1 号点 90° / 10m 插新点 → 再以新点 270° / 10m 插一点 → 删原 1 号点</td></tr>
-      <tr><td>把图形的 3 号点变成 4 号点</td><td>在 2 与 3 之间任意加点（序号后移）</td></tr>
-      <tr><td>将 2 号点与 3 号点重合</td><td>以 2 号为基准，任意方位角 / <b>0m</b> 插入新点</td></tr>
-      <tr><td>删除 2 号点</td><td>选中 2 号 → 右键<b>删除航点</b></td></tr>
-      <tr><td>把正方形变成三角形</td><td>删掉任意一个点</td></tr>
-      <tr><td>把正方形变成梯形</td><td>在一条边上加一点，再删掉对应角点</td></tr>
-      <tr><td>把 3 号点移动到 2 号点正西方 10m</td><td>以 2 号为基准 270° / 10m 加新点 → 删掉原来的 3 号点</td></tr>
+      <tr><td>在 2 号点东北方向（45°）10 m 加一个航点</td><td>选 2 号 → 编辑器 45° / 10 m → 生成 → 补参数</td></tr>
+      <tr><td>在 2 号与 3 号中间加一个点</td><td>选 2 号 → 右键<b>向后添加</b> → 补参数</td></tr>
+      <tr><td>在 2、3 之间加点，距 2 号 5 m</td><td>选 2 号 → 编辑器：2→3 的方位角 / 5 m</td></tr>
+      <tr><td>在某点东 10 m 加一个点，<b>保持图形不变</b></td><td>原 1 号 90° / 10 m 插点 → 再以新点 270° / 10 m 插点 → 删原 1 号</td></tr>
+      <tr><td>把图形的 3 号点变成 4 号点</td><td>在 2、3 之间加点（序号后移）</td></tr>
+      <tr><td>2 号点与 3 号点重合</td><td>以 2 号为基准，任意角 / <b>0 m</b> 插点</td></tr>
+      <tr><td>删除 2 号点 / 正方形变三角形</td><td>选中 → 右键<b>删除航点</b></td></tr>
+      <tr><td>正方形变梯形</td><td>一条边上加点，再删掉对角那个点</td></tr>
+      <tr><td>把 3 号点移到 2 号点正西 10 m</td><td>以 2 号为基准 270° / 10 m 加点 → 删原 3 号点</td></tr>
     </tbody>
   </table></div>
 
-  <h3>8.2 变高</h3>
+  <h3>7.2 变高（改终点）</h3>
   <div class="tw"><table class="small">
-    <thead><tr><th style="width:44%">考官指令</th><th>操作</th></tr></thead>
+    <thead><tr><th style="width:46%">考官指令</th><th>操作</th></tr></thead>
     <tbody>
-      <tr><td>2 到 3 的高度升高 5m</td><td>3 号点高度 +5</td></tr>
-      <tr><td>把 23 这整段的高度改为 30m</td><td>2 号点、3 号点都改 30m</td></tr>
-      <tr><td>2 到 3 中间加一个点，2 到 4 高度提升 5m</td><td>2 号后加点 → 3、4 号高度 +5</td></tr>
-      <tr><td>飞机以 35m 高度飞往 3 号点</td><td>3 号点 = 35m，<b>开始执行点 = 3 号</b></td></tr>
-      <tr><td>暂停后原地降低 5m，再飞往 3 号点</td><td>3 号点 = 当前高度 − 5，<b>开始执行点 = 3 号</b></td></tr>
-      <tr><td>飞机在 2 号点降高 5m 飞往 3 号点</td><td>3 号点高度 − 5</td></tr>
-      <tr><td>整体高度改为 35m / 整体升高 5m</td><td>航线设置里改</td></tr>
-      <tr><td>1 到 2 之间有 30m 高障碍物，要求安全飞行</td><td>1、2 号点高度都改 <b>60m</b></td></tr>
+      <tr><td>2 到 3 的高度升高 5 m</td><td>3 号点高度 +5</td></tr>
+      <tr><td>23 这整段高度改为 30 m</td><td>2、3 号点都改 30</td></tr>
+      <tr><td>2 到 3 中间加点，2 到 4 高度提升 5 m</td><td>2 号后加点 → 3、4 号高度 +5</td></tr>
+      <tr><td>飞机以 35 m 高度飞往 3 号点</td><td>3 号点 = 35，<b>开始执行点 = 3</b></td></tr>
+      <tr><td>暂停后原地降低 5 m，再飞往 3 号点</td><td>3 号点 = 当前高度 − 5，<b>开始执行点 = 3</b></td></tr>
+      <tr><td>飞机在 2 号点降高 5 m 飞往 3 号点</td><td>3 号点高度 − 5</td></tr>
+      <tr><td>整体高度改为 35 m / 整体升高 5 m</td><td>航线设置里改</td></tr>
+      <tr><td>1 到 2 之间有 30 m 高障碍物，要求安全飞行</td><td>1、2 号点高度都改 <b>60 m</b></td></tr>
     </tbody>
   </table></div>
 
-  <h3>8.3 变速</h3>
+  <h3>7.3 变速（改起点）</h3>
   <div class="tw"><table class="small">
-    <thead><tr><th style="width:44%">考官指令</th><th>操作</th></tr></thead>
+    <thead><tr><th style="width:46%">考官指令</th><th>操作</th></tr></thead>
     <tbody>
-      <tr><td>2 到 3 的速度改为 3m/s</td><td>2 号点速度 = 3</td></tr>
-      <tr><td>2 到 3 的速度提升 1m/s</td><td>2 号点速度 +1</td></tr>
-      <tr><td>2 到 3 中间加一点，2 到 4 速度提升 2m/s</td><td>2、3 号点速度 +2</td></tr>
-      <tr><td>飞机以 3m/s 飞往 3 号点</td><td><b>初始速度</b>改 3，<b>开始执行点 = 3 号</b></td></tr>
-      <tr><td>整条航线速度改为 5m/s</td><td>航线设置里改航点速度</td></tr>
-      <tr><td>把 23 这整段的速度改为 3m/s</td><td>2、3 号点都改 3</td></tr>
+      <tr><td>2 到 3 的速度改为 3 m/s</td><td>2 号点速度 = 3</td></tr>
+      <tr><td>2 到 3 的速度提升 1 m/s</td><td>2 号点速度 +1</td></tr>
+      <tr><td>2 到 3 中间加点，2 到 4 速度提升 2 m/s</td><td>2、3 号点速度 +2</td></tr>
+      <tr><td>飞机以 3 m/s 飞往 3 号点</td><td><b>初始速度</b> 3，<b>开始执行点 = 3</b></td></tr>
+      <tr><td>整条航线速度改为 5 m/s</td><td>航线设置里改航点速度</td></tr>
+      <tr><td>23 这整段速度改为 3 m/s</td><td>2、3 号点都改 3</td></tr>
     </tbody>
   </table></div>
 
-  <div class="warn"><span class="lb">必补</span>新加的航点默认高度/速度可能是 0！每加一个点都要补成 <b>高度、水平速度、垂直速度、悬停时间</b>（无要求就用 30m / 3 / 3 / 3s），再上传。</div>
+  <div class="warn"><span class="lb">必补</span>新加的航点默认参数可能是 0。每个新点都要补 <b>高度 / 水平速度 / 垂直速度 / 悬停时间</b>（没要求就 30 m / 3 / 3 / 3 s），<b>再上传</b>。</div>
 
-  <h3>8.4 收尾动作与话术（顺序别乱）</h3>
+  <h3>7.4 收尾流程与话术</h3>
   <ol class="steps">
-    <li><b>复述指令</b><span class="body">把考官的话重复一遍——这既是核对，也是给自己争取时间。</span></li>
-    <li><b>改 → 上传</b><span class="body">改完点上传；需要从中间开始就设“开始执行点”。</span></li>
-    <li><b>报告</b><span class="body">“报告考官，修改完毕，是否执行航线？”</span></li>
-    <li><b>执行并主动汇报</b><span class="body">“报告考官，飞机正以 3 米每秒的速度飞往 2 号点，当前高度 30 米，当前电压 46.87 伏，卫星颗数 28 颗。”</span></li>
-    <li><b>等指令、盯暂停</b><span class="body">鼠标提前放到<b>暂停</b>按钮上；考官让停的那个航点一到就暂停，拿遥控器准备返航考试。</span></li>
+    <li><b>复述</b><span class="body">把指令重复一遍——既是核对，也给自己争取操作时间。</span></li>
+    <li><b>改 → 上传</b><span class="body">需要从中间开始就设"开始执行点"。</span></li>
+    <li><b>报告</b><span class="body">"报告考官，修改完毕，是否执行航线？"</span></li>
+    <li><b>执行 + 主动汇报</b><span class="body">"报告考官，飞机正以 3 米每秒的速度飞往 2 号点，当前高度 30 米，当前电压 46.87 伏，卫星颗数 28 颗。"</span></li>
+    <li><b>盯暂停</b><span class="body">鼠标提前放到暂停按钮上；考官指定的航点一到就暂停，拿遥控器准备返航。</span></li>
   </ol>
 </section>
 
-<!-- ============ 09 应急返航 ============ -->
+<!-- ============ 08 返航 ============ -->
 <section class="sec" id="rtl">
-  <h2><span class="n">09</span>应急返航（手动飞回指定点）</h2>
-  <p class="lead">“应急返航”= 回到起飞点 H。考官会让你手动飞向某个航点，考核你的<b>定向</b>能力。</p>
+  <h2><span class="n">08</span>应急返航：钟点法定向 + 手飞</h2>
+  <p class="lead">"应急返航"= 回起飞点 H。考官会让你手动飞向某个点，考的是<b>不看屏幕也能飞对方向</b>。</p>
 
-  <h3>9.1 钟点法：目标方位 = 30° × 钟点数</h3>
-  <div class="f b big">把“当前机位 → 目标点”连一条线，看它指向几点钟 → 需要的方位角 = 30° × X</div>
+  <h3>8.1 钟点法：一个乘法</h3>
+  <div class="f b big">目标方位角 = 30° × 钟点数 X</div>
+  <p>把"飞机当前位置 → 目标点"连一条线，看它指向几点钟，那个"几点"乘 30 就是你要转到的方位角。</p>
   <div class="tw"><table class="small tight">
     <thead><tr><th class="c">钟点</th><th class="c">1</th><th class="c">2</th><th class="c">3</th><th class="c">4</th><th class="c">5</th><th class="c">6</th><th class="c">7</th><th class="c">8</th><th class="c">9</th><th class="c">10</th><th class="c">11</th><th class="c">12</th></tr></thead>
     <tbody><tr><td class="c">方位角</td><td class="c num">30</td><td class="c num">60</td><td class="c num">90</td><td class="c num">120</td><td class="c num">150</td><td class="c num">180</td><td class="c num">210</td><td class="c num">240</td><td class="c num">270</td><td class="c num">300</td><td class="c num">330</td><td class="c num">0</td></tr></tbody>
   </table></div>
+  <div class="why"><b>为什么是 30：</b>钟面一圈 12 小时对应 360°，一小时 30°。和 1.5 节的十六方位是同一个道理。</div>
 
-  <h3>9.2 操作序列</h3>
+  <h3>8.2 操作顺序</h3>
   <ol class="steps">
-    <li><b>算目标方位 Y</b><span class="body">确认飞机当前位置到目标点的连线指向 X 点钟 → Y = 30X。再看从现在机头朝向转到 Y，<b>顺时针近还是逆时针近</b>，选近的那边转。</span></li>
-    <li><b>切姿态模式</b><span class="body">考官会遮屏/移屏（不许看屏幕飞）。切<b>姿态模式</b>，眼睛看飞机。</span></li>
-    <li><b>快速转 → 提前减速转</b><span class="body">先快速转；<b>离 Y 还差 30°</b> 时开始慢转；<b>差 15°</b> 时开始缓慢推前进并继续转到 Y。</span></li>
-    <li><b>按限速前进</b><span class="body">考官要求“水平速度不超过 5m/s”就压在 5 以内；角度偏了随时修正方向。</span></li>
-    <li><b>接近减速</b><span class="body">接近目标点前减速到 <b>1m/s</b>，让飞机箭头停在目标点上。</span></li>
-    <li><b>风大怎么修</b><span class="body">有侧风会飘，用副翼持续修正，保持朝目标点飞。</span></li>
+    <li><b>算 Y</b><span class="body">目标方位 Y = 30X；再判断从当前机头转到 Y，顺时针近还是逆时针近（差值 ≤180° 那侧更近）。</span></li>
+    <li><b>切姿态模式</b><span class="body">考官会遮屏或移屏，不许看屏幕飞。切模式，眼睛看飞机。</span></li>
+    <li><b>快转 → 提前慢转</b><span class="body">先快速转；离 Y 还差 30° 开始慢转；差 15° 开始缓慢推前进并继续转到 Y。</span></li>
+    <li><b>按限速前进</b><span class="body">考官说"不超过 5 m/s"就压在 5 以内；偏了随时修方向。</span></li>
+    <li><b>接近减速</b><span class="body">快到点时减速到 1 m/s，让飞机箭头停在目标点上。</span></li>
+    <li><b>风大用副翼修</b><span class="body">有侧风会飘，持续用副翼压住，别让机头偏。</span></li>
   </ol>
-
   <div class="grid g2">
-    <div class="box"><div class="k">顺 / 逆判断</div><div class="d">顺时针 = 右转（副翼/方向杆向右），逆时针 = 左转。差值 ≤ 180° 的那边就是更快的方向。</div></div>
-    <div class="box"><div class="k">扣分点</div><div class="d">方位角转过（过冲）、速度超限、箭头没停在点上、切错模式。宁可慢转，不要过冲。</div></div>
+    <div class="box"><div class="k">左转 / 右转</div><div class="d">顺时针 = 右转，逆时针 = 左转（和方位角增大的方向一致）。</div></div>
+    <div class="box"><div class="k">常见扣分</div><div class="d">转过（过冲）、速度超限、箭头没停在点上、切错模式。<b>宁可慢转，不要过冲。</b></div></div>
   </div>
 </section>
 
-<!-- ============ 10 检查清单 ============ -->
+<!-- ============ 09 检查 ============ -->
 <section class="sec" id="check">
-  <h2><span class="n">10</span>上传前 10 查 + 14 个坑</h2>
-  <p class="lead">检查的 3 分钟不是“看一眼”，是逐条对照题卡打勾。</p>
+  <h2><span class="n">09</span>交卷前的检查与 12 个坑</h2>
+  <p class="lead">检查不是"看一眼"，是按清单打勾。</p>
 
   <div class="grid g2">
     <div class="box">
@@ -857,77 +929,44 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
       <div class="d" style="line-height:1.9">
         ① 图形闭合了吗？点数对不对？<br>
         ② 朝向：题给的那条边方位角对了吗？<br>
-        ③ H：N-H 的<b>方位角+距离</b>填的是不是反方向？方位对不对（内/外侧）？<br>
-        ④ 经纬度：是哪个点的？正负号？度分秒对不对？<br>
-        ⑤ 有避让点：序号、高度、平移基准点（2 号）都对吗？<br>
-        ⑥ 高度：全局还是分段？H 高度要不要设成航高？<br>
-        ⑦ 速度：<b>水平 + 垂直</b>都改了吗？<br>
-        ⑧ 停留：值对不对？协调转弯还填停留了吗？<br>
-        ⑨ 循环：几圈 / 不循环？完成动作设了吗？<br>
-        ⑩ 上传了吗？开始执行点对不对？
+        ③ H：填的是 N-H 吗？要不要取反方向？方位在内侧还是外侧？<br>
+        ④ 经纬度：哪个点？正负号？秒数对了吗？<br>
+        ⑤ 插了避让点：序号、高度、平移基准点都改了吗？<br>
+        ⑥ 高度：全局还是分段？H 高度要不要设？<br>
+        ⑦ 速度：<b>水平和垂直</b>都改了吗？<br>
+        ⑧ 停留：数值对了吗？协调转弯却填了停留？<br>
+        ⑨ 循环：几圈？完成动作设了吗？<br>
+        ⑩ 上传了吗？开始执行点对吗？
       </div>
     </div>
     <div class="box">
-      <div class="k">最容易丢分的 14 个坑</div>
+      <div class="k">最容易丢分的 12 个坑</div>
       <div class="d" style="line-height:1.9">
-        1 “到”和“在”搞反 → 差 180°<br>
-        2 忘归一化：负数/超过 360<br>
-        3 没旋转就摆 H（假设方位角陷阱）<br>
-        4 H 条件填了 A-H 而不是 H-A<br>
-        5 夹角顺逆符号错（逆时针该 −）<br>
-        6 起飞点/航点经纬度搞混、E/N 顺序颠倒<br>
+        1 "到"与"在"搞反 → 差 180°<br>
+        2 忘归一化：负数 / 超过 360<br>
+        3 没旋转就摆 H<br>
+        4 H 条件填成 H-X，应该是 X-H<br>
+        5 夹角顺逆符号错<br>
+        6 起飞点与航点经纬度搞混、E/N 顺序颠倒<br>
         7 有避让点还按 1 号点平移<br>
-        8 双坐标点了“确认”按钮<br>
-        9 坐标开关忘关 → 所有点重合<br>
+        8 双坐标点了"确认"按钮<br>
+        9 坐标开关忘了关 → 点全重合<br>
         10 新增点参数没补 → 0 高度 0 速度<br>
         11 只改水平速度，没改垂直速度<br>
-        12 协调转弯还指望停留<br>
-        13 不循环却漏设完成动作<br>
-        14 改了没点“应用/上传”
+        12 改了没点"应用 / 上传"
       </div>
     </div>
   </div>
 
-  <div class="tip"><span class="lb">抽检方法</span>用测距工具量 2~3 段：一段是题给的<b>固定边</b>（验朝向），一段是 <b>N-H</b>（验起飞点），一段是<b>最长边</b>（验比例）。三段都对，基本就对了。</div>
+  <div class="tip"><span class="lb">抽检</span>量三段：题给的固定边（验朝向）、N-H（验起飞点）、最长的一条边（验比例）。三段都对，基本就对了。</div>
 </section>
 
-<!-- ============ 11 真题统计 ============ -->
-<section class="sec" id="stats">
-  <h2><span class="n">11</span>真题统计（为什么上面这些是重点）</h2>
-  <p class="lead">对《真题》521 页、516 张卡片做关键词统计，用于判断“哪些条件几乎每场都有”。</p>
-
-  <div class="tw"><table class="small">
-    <thead><tr><th style="width:30%">统计项</th><th class="c" style="width:14%">出现率</th><th>说明</th></tr></thead>
-    <tbody>
-      <tr><td>含夹角条件（∠）</td><td class="c num">59%</td><td>其中双夹角形态约 45% —— 夹角是最高频的题型</td></tr>
-      <tr><td>停留时间</td><td class="c num">73%</td><td>5s 最多，其次 3s / 2s / 6s</td></tr>
-      <tr><td>停止转弯</td><td class="c num">72%</td><td>定点转弯 19%、协调转弯 8%</td></tr>
-      <tr><td>闭合不循环</td><td class="c num">32%</td><td>闭合循环 14%；写“执行 N 次”的也归循环</td></tr>
-      <tr><td>度分秒经纬度</td><td class="c num">56%</td><td>十进制只占 12%，转换要练熟</td></tr>
-      <tr><td>符号化参数（a~g）</td><td class="c num">50%</td><td>(一)(二) 结构占 57%——新题一半是字母题</td></tr>
-      <tr><td>相对地面高度</td><td class="c num">49%</td><td>另有 19% 明确要求“起飞点高度 = 航线高度”</td></tr>
-      <tr><td>含风向条件</td><td class="c num">15%</td><td>顺风/逆风/左侧风/右侧风/正下风</td></tr>
-      <tr><td>避让点 / 空域限制</td><td class="c num">13%</td><td>需要插入绕飞点，序号整体后移</td></tr>
-      <tr><td>双坐标（两点经纬度）</td><td class="c num">12%</td><td>H+航点，或航点+航点</td></tr>
-      <tr><td>扫描航线</td><td class="c num">9%</td><td>参数 a/b/c/d/e，常与避让点同题出现</td></tr>
-      <tr><td>时针分针</td><td class="c num">1%</td><td>会算即可，不必深究</td></tr>
-      <tr><td>平均条件条数</td><td class="c num">5.2 条</td><td>常见为 6~10 条，一条不能漏</td></tr>
-    </tbody>
-  </table></div>
-
-  <div class="grid g2" style="margin-top:12px">
-    <div class="box"><div class="k">图形出现率</div><div class="d">五边形 15% · 等边三角形 12% · 梯形 10% · 四边形 9% · 六边形 7% · 等腰直角三角形 7% · 直角三角形 7% · 正方形 3% · 圆形 &lt;1%</div></div>
-    <div class="box"><div class="k">结论</div><div class="d">把“五边形 / 等边三角形 / 直角梯形 / 正六边形”四种练到 3 分钟内画完闭合，就能覆盖 <b>六成以上</b>的题。</div></div>
-  </div>
-</section>
-<!-- ============ 12 速算器 ============ -->
+<!-- ============ 10 速算器 ============ -->
 <section class="sec calcwrap" id="calc">
-  <h2><span class="n">12</span>速算器（练习用，考场用计算器/草稿纸）</h2>
-  <p class="lead">把步骤练成肌肉记忆：以后在考场只要写一行算式就能出结果。</p>
+  <h2><span class="n">10</span>速算器（练手感用，考场用计算器 / 草稿纸）</h2>
+  <p class="lead">用它把 01、02 两节的换算练成条件反射：先手算，再对答案。</p>
 
   <div class="calcgrid">
-
-    <!-- 1 方位角 -->
     <div class="calc">
       <h4>① 方位角换算 / 反方向</h4>
       <div class="row"><label>基准</label><input id="b1" type="number" value="90" step="any"></div>
@@ -935,7 +974,6 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
       <div class="out" id="bo">—</div>
     </div>
 
-    <!-- 2 夹角 -->
     <div class="calc">
       <h4>② 夹角求待求航向</h4>
       <div class="row"><label>已知</label><input id="c1" type="number" value="135" step="any"></div>
@@ -943,14 +981,12 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
       <div class="out" id="co">—</div>
     </div>
 
-    <!-- 3 时钟 -->
     <div class="calc">
       <h4>③ 时针 / 分针</h4>
       <div class="row"><label>时</label><input id="t1" type="number" value="1" min="0" max="23" step="1"><label style="min-width:auto">分</label><input id="t2" type="number" value="48" min="0" max="59" step="1"></div>
       <div class="out" id="to">—</div>
     </div>
 
-    <!-- 4 风向 -->
     <div class="calc">
       <h4>④ 风向 → 航向</h4>
       <div class="row">
@@ -974,14 +1010,12 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
       <div class="out" id="wo">—</div>
     </div>
 
-    <!-- 5 正多边形 -->
     <div class="calc">
       <h4>⑤ 正多边形内角</h4>
       <div class="row"><label>边数 N</label><input id="p1" type="number" value="6" min="3" step="1"></div>
       <div class="out" id="po">—</div>
     </div>
 
-    <!-- 6 经纬度 -->
     <div class="calc">
       <h4>⑥ 度分秒 ⇄ 十进制</h4>
       <div class="row"><label>度分秒</label><input id="d1" type="number" value="118" step="any"><input id="d2" type="number" value="22" step="any"><input id="d3" type="number" value="39" step="any"></div>
@@ -989,14 +1023,44 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
       <div class="out" id="do">—</div>
     </div>
 
-    <!-- 7 勾股 -->
     <div class="calc">
       <h4>⑦ 勾股 / 斜边</h4>
       <div class="row"><label>直角边</label><input id="g1" type="number" value="30" step="any"><input id="g2" type="number" value="30" step="any"></div>
       <div class="out" id="go">—</div>
     </div>
-
   </div>
+</section>
+
+<!-- ============ 11 计划 ============ -->
+<section class="sec" id="plan">
+  <h2><span class="n">11</span>五天练法 + 自测</h2>
+  <p class="lead">按天练比"刷 50 道"有效得多。每天只解决一类能力，练到不看笔记能重复。</p>
+
+  <div class="tw"><table>
+    <thead><tr><th style="width:12%">天</th><th style="width:26%">练什么</th><th>怎么算过关</th></tr></thead>
+    <tbody>
+      <tr><td><b>第 1 天</b></td><td>方位角：1.1~1.8 全部 + 速算器 ①②④ 各 20 题</td><td>任意两个方位词互换、反方向、夹角，5 秒内答对</td></tr>
+      <tr><td><b>第 2 天</b></td><td>正多边形：等边三角形、正六边形、正方形，各画 10 遍</td><td>3 分钟内画出闭合图形，并能用一条边推出全部边的方位角</td></tr>
+      <tr><td><b>第 3 天</b></td><td>例 3、例 4：梯形 + 双夹角 + 风向</td><td>不看答案，能自己算出所有边和 1-H</td></tr>
+      <tr><td><b>第 4 天</b></td><td>例 5、例 6：避让点 + 双坐标 + 字母题 + 扫描</td><td>插入点后能正确改序号、改基准点、改参数</td></tr>
+      <tr><td><b>第 5 天</b></td><td>整套限时 7 分钟 × 5 套（审题 1′ + 作答 3′ + 检查 3′）+ 重规划话术 + 返航</td><td>5 套里至少 4 套一次成功，不用回头改</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>自测 6 题（先自己算，再展开）</h3>
+  <ol class="small">
+    <li>东偏北 35° 等于多少？</li>
+    <li>等边三角形逆时针，已知 3-1 = 160°，求 1-2。</li>
+    <li>正六边形顺时针，已知 1-2 = 30°，求 4-5。</li>
+    <li>本场西北风，1-2 为正左侧风，求 1-2。</li>
+    <li>题说"起飞点到 2 点航向 NE，距离 80 m"，你在起飞点快捷调整里填什么？</li>
+    <li>15:40，时针与分针的夹角是多少？</li>
+  </ol>
+  <details><summary>看答案</summary><div class="a">
+    ① 90−35 = <b>55°</b>。 ② 用转折公式逆时针减 120：160−120 = <b>40°</b>。 ③ 顺时针每段 +60：30→90→150→210，所以 4-5 = <b>210°</b>。 ④ 左侧风 = F+90 = 315+90 = 405 → <b>45°</b>。 ⑤ 第 <b>2</b> 个航点、角度 <b>225</b>、距离 <b>80</b>（因为题给的是 H-2，要取反得 2-H）。 ⑥ 时针 = 30×3 + 0.5×40 = 110°，分针 = 6×40 = 240°，夹角 = <b>130°</b>。
+  </div></details>
+
+  <div class="key"><span class="lb">最后一句</span>题目永远在描述"形状 + 朝向 + H + 位置 + 参数"。你练到<b>看见任何一句话都能立刻归类</b>，就已经能举一反三了——剩下的只是手速。</div>
 </section>
 
 </main>
@@ -1004,8 +1068,8 @@ footer .in{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-w
 
 <footer>
   <div class="in">
-    <div>CAAC 无人机地面站 · 核心笔记　|　依据《地面站备考宝典》(79 页) 与《真题》(516 张卡片) 整理</div>
-    <div>标 <span class="tag dr">※</span> 为据真题条件推导的补充技巧，非宝典原文；以你所在考点的实际要求为准。</div>
+    <div>CAAC 无人机地面站 · 从零学会做题　|　内容依据《地面站备考宝典》，例题按真题条件重排并给出完整推导</div>
+    <div>标 <span class="tag dr">※</span> 为推导补充（宝典未直接写出的技巧）；考场以当次题卡与考官要求为准。</div>
   </div>
 </footer>
 
